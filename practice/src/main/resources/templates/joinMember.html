@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<http xmlns:th="http://www.thymeleaf.org">
+    <body>
+    <div>
+        <form action="/members/join" method="post">
+            <div>
+                <label for="name">고객 이름</label>
+                <input type="text" id="name" name="name" placeholder="이름 입력">
+            </div>
+            <div>
+                <label for="pw">비밀번호</label>
+                <input type="text" id="pw" name="pw" placeholder="비밀번호 입력">
+            </div>
+            <button type="submit">등록</button>
+        </form>
+    </div>
+    </body>
+</http>

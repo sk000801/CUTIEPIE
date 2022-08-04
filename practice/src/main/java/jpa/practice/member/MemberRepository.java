@@ -26,10 +26,11 @@ public class MemberRepository {
                 .getResultList();
     }
 
-    public Member searchMember() {
-        String jpql = "select m From Member m";
-        boolean b = false;
-        if(StringUtils.hasText())
+    public List<Member> searchMember(String name) {
+        return em.createQuery("select m from Member m where m.name = :name",
+                Member.class)
+                .setParameter("name", name)
+                .getResultList();
     }
 
 }
