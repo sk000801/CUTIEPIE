@@ -3,8 +3,8 @@
   <body>
   <div>
     <div>
-      <form action="/members/search" method="get">
-        <input type="text" th:field="*{name}" placeholder="회원명" />
+      <form method="get">
+        <input type="text" th:text="${name}" placeholder="회원명" />
         <button type="submit">검색</button>
       </form>
     </div>

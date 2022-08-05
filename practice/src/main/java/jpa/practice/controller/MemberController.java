@@ -42,7 +42,7 @@ public class MemberController {
     }
 
     @GetMapping("/members/search")
-    public String search(String name, Model model) {
+    public String search(@ModelAttribute("name") String name, Model model) {
         List<Member> results = memberService.search(name);
         model.addAttribute("members", results);
         return "memberSearch";
