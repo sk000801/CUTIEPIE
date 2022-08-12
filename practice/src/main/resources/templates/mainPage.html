@@ -7,14 +7,18 @@
         width:100%;
     }
 
-    @media (max-width: 1320px)
-    #wrap #header {
-    }
-
     .banner {
         height: 43px;
         border-bottom: 1px solid #e8e8e8;
         border-bottom-color: rgba(0,0,0,.09);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .page {
+        color: rgba(55,55,55,0.9);
+        text-decoration: none;
     }
 
     .name {
@@ -39,7 +43,18 @@
 </head>
 <body>
     <div class="banner">
-
+        <div class="page">
+            <a href="/members/login" class="page">로그인</a>
+            <a href="/members/join" class="page">회원가입</a>
+            <a href="/members/like" class="page">장바구니</a>
+            |
+            <a href="/page/review" class="page">리뷰</a>
+            <a href="/page/question" class="page">QNA</a>
+        </div>
+        <div class="search">
+            <img src="https://www.flaticon.com/kr/free-icon/search_149852.jpg" />
+            <input type="text" placeholder="검색어 입력!" name="type" />
+        </div>
     </div>
     <div class="name">
         <div class="real_name">
