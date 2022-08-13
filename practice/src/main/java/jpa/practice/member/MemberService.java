@@ -18,6 +18,9 @@ public class MemberService {
         memberRepository.join(member);
     }
 
+    public Member findName(String name) {
+        return memberRepository.findName(name);
+    }
     public List<Member> findAll() {
        return memberRepository.findAll();
     }

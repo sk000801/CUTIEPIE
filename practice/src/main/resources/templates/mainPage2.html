@@ -64,6 +64,7 @@
     <body>
     <div class="banner">
         <div class="page">
+            ${member.name}님
             <a href="/members/like" class="page">장바구니</a>
             |
             <a href="/page/review" class="page">리뷰</a>
@@ -94,6 +95,10 @@
 
         </div>
     </div>
+    <script>
+        let page = document.getElementsByClassName('page')[0]
+        page.innerHTML = ${member.name}
+    </script>
     </body>
     </html>
 </http>

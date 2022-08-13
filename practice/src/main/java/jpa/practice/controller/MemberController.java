@@ -21,7 +21,7 @@ public class MemberController {
     @GetMapping("/members/join")
     public String join(Model model) {
         model.addAttribute("form", new MemberForm());
-        return "joinMember";
+        return "members/joinMember";
     }
 
     @PostMapping("/members/join")
@@ -35,21 +35,29 @@ public class MemberController {
     }
 
     @GetMapping("/members/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("form", new MemberForm());
+        return "members/loginMember";
+    }
 
+    @PostMapping("/members/login")
+    public String login2(MemberForm form, Model model) {
+        Member member = memberService.findName(form.getName());
+        model.addAttribute("member", member);
+        return "mainPage2";
     }
 
     @GetMapping("/members/list")
     public String list(Model model) {
         List<Member> members = memberService.findAll();
         model.addAttribute("members", members);
-        return "MemberList";
+        return "members/MemberList";
     }
 
     @GetMapping("/members/search")
     public String search(@ModelAttribute("name") String name, Model model) {
         List<Member> results = memberService.search(name);
         model.addAttribute("members", results);
-        return "memberSearch";
+        return "members/memberSearch";
     }
 }
