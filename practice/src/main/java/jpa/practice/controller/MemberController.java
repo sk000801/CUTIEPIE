@@ -43,6 +43,7 @@ public class MemberController {
     @PostMapping("/members/login")
     public String login2(MemberForm form, Model model) {
         Member member = memberService.findName(form.getName());
+//        member.setName(form.getName());
         model.addAttribute("member", member);
         return "mainPage2";
     }

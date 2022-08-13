@@ -64,7 +64,7 @@
     <body>
     <div class="banner">
         <div class="page">
-            ${member.name}님
+            <div th:text="${member.name}+ '님 안녕하세요!'" />
             <a href="/members/like" class="page">장바구니</a>
             |
             <a href="/page/review" class="page">리뷰</a>
