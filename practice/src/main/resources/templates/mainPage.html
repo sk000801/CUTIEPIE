@@ -29,9 +29,15 @@
         justify-content: center;
     }
 
-    .search_pic {
-        width: 17px;
-        height: 17px;
+    .form {
+        display: flex;
+        justify-content: center;
+    }
+    .search_p {
+        background: url("/image/search.svg");
+        border: none;
+        width: 25px;
+        height: 25px;
     }
 
     .name {
@@ -82,8 +88,10 @@
             <a href="/page/question" class="page">QNA</a>
         </div>
         <div class="search">
-            <img src="/image/search.svg" class="search_pic"/>
-            <input type="text" placeholder="검색어 입력!" name="type" />
+            <form action="/products/search" class="form" method="post">
+                <button type="submit" class="search_p"> </button>
+                <input type="text" placeholder="검색어 입력!" name="type" />
+            </form>
         </div>
     </div>
     <div class="name">
