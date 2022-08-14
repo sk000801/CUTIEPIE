@@ -20,4 +20,7 @@ public class Member {
 
     @Column(name="member_name")
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
 }

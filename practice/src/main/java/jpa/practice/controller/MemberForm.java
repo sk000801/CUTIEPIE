@@ -1,5 +1,6 @@
 package jpa.practice.controller;
 
+import jpa.practice.member.MemberStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,5 @@ public class MemberForm {
     private String pw;
     @NotEmpty
     private String name;
+    private MemberStatus status;
 }

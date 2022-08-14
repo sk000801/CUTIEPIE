@@ -2,6 +2,7 @@ package jpa.practice.controller;
 
 import jpa.practice.member.Member;
 import jpa.practice.member.MemberService;
+import jpa.practice.member.MemberStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class MemberController {
         Member member = new Member();
         member.setName(form.getName());
         member.setPw(form.getPw());
+        member.setStatus(form.getStatus());
 
         memberService.join(member);
         return "redirect:/";
@@ -43,9 +45,16 @@ public class MemberController {
     @PostMapping("/members/login")
     public String login2(MemberForm form, Model model) {
         Member member = memberService.findName(form.getName());
-//        member.setName(form.getName());
         model.addAttribute("member", member);
-        return "mainPage2";
+
+        String a = null;
+        if(member.getStatus() == MemberStatus.member) {
+            a = "mainPage2";
+        }
+        else if(member.getStatus() == MemberStatus.admin) {
+            a = "mainPage3";
+        }
+        return a;
     }
 
     @GetMapping("/members/list")

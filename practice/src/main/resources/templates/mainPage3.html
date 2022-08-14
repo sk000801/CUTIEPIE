@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<http xmlns:th="http://www.thymeleaf.org">
+  <html lang="en">
+  <style>
+    body {
+        height:100vh;
+        width:100%;
+    }
+    a{
+        text-decoration: none;
+    }
+
+    .banner {
+        height: 43px;
+        border-bottom: 1px solid #e8e8e8;
+        border-bottom-color: rgba(0,0,0,.09);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .page {
+        color: rgba(55,55,55,0.9);
+    }
+
+    .search {
+        display:flex;
+        justify-content: center;
+    }
+
+    .search_pic {
+        width: 17px;
+        height: 17px;
+    }
+
+    .name {
+        display: flex;
+        flex-direction: column;
+        height:20vh;
+    }
+
+    .real_name {
+        margin-top: 10px;
+        margin-left: 30%;
+    }
+
+    .link {
+        width:100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .link_pic {
+        width:fit-content;
+        height: fit-content;
+        align-items:center;
+    }
+
+    .product_menu {
+        width:100%;
+        text-align: center;
+        border-top: 1px solid rgba(0,0,0,.70);
+        border-bottom: 1px solid rgba(0,0,0,.09);
+        height: 52px;
+    }
+
+
+</style>
+  <head>
+    <meta charset="UTF-8">
+    <title>MainPage</title>
+  </head>
+  <body>
+  <div class="banner">
+    <div class="page">
+      <div th:text="${member.name}+ '님 안녕하세요!'" />
+      <a href="/admins/pManage" class="page">상품관리</a>
+      <a href="/admins/question" class="page">QNA</a>
+      <button type="submit" class="logout">로그아웃</button>
+    </div>
+    <div class="search">
+      <img src="/image/search.svg" class="search_pic"/>
+      <input type="text" placeholder="검색어 입력!" name="type" />
+    </div>
+  </div>
+  <div class="name">
+    <div class="real_name"><img src="/image/로고.png" ></div>
+    <div class="link">
+      <a href="https://www.instagram.com/fromheadtotoe.kr" ><img src="https://img.icons8.com/windows/512/instagram-new.png" style="width: 40px; height: 40px;"
+                                                                 class="link_pic"/> </a>
+      <a href="https://www.facebook.com/fromhead_totoe/"><img src="https://i.pinimg.com/originals/43/bb/91/43bb91aa0bd9a847f1cd9bbb413ab980.png" style="width: 40px; height: 40px;"
+                                                              class="link_pic"/> </a>
+    </div>
+  </div>
+  <div class="product_menu">
+
+  </div>
+  <div class="product_display">
+    <div class="scroll-horizon">
+
+    </div>
+    <div class="scroll">
+
+    </div>
+  </div>
+  <script>
+    function logout() {
+      var value = document.getElementsByClassName(logout);
+      value.addEventListener('click',()=>{window.location.href = '/'})
+      alert("까꿍")
+    }
+  </script>
+  </body>
+  </html>
+</http>
