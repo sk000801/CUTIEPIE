@@ -1,2 +1,4 @@
-package jpa.practice.product;public class ProductSearch {
+package jpa.practice.product;
+
+public class ProductSearch {
 }
