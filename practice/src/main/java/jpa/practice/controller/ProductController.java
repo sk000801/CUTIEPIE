@@ -49,6 +49,12 @@ public class ProductController {
 
     @PostMapping("/admins/pManage/{id}/edit")
     public String edit2(ProductForm form) {
+        Product product = new Product();
+        product.setName(form.getPName());
+        product.setPrice(form.getPrice());
+        product.setStock(form.getStock());
 
+        productService.join(product);
+        return "redirect:/admins/pManage";
     }
 }
