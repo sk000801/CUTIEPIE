@@ -21,6 +21,10 @@ public class ProductRepository {
                 .getSingleResult();
     }
 
+    public Product findId(Long id) {
+        return em.find(Product.class, id);
+    }
+
     public List<Product> findProduct(String name) {
         return em.createQuery("select p from Product p where p.name = :name", Product.class)
                 .setParameter("name", name)

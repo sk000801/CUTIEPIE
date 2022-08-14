@@ -14,6 +14,10 @@ public class ProductService {
         productRepository.join(product);
     }
 
+    public Product findId(Long id) {
+        return productRepository.findId(id);
+    }
+
     public Product findName(String name) {
         return productRepository.findName(name);
     }
