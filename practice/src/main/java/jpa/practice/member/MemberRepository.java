@@ -2,6 +2,7 @@ package jpa.practice.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Transactional
 public class MemberRepository {
 
     private final EntityManager em;
