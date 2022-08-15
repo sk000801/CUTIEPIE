@@ -4,7 +4,7 @@
     <div>
         <form th:object="${form}" action="/admins/pManage/{id}/edit" method="post">
             <div>
-                <label th:for="pName">고객 이름</label>
+                <label th:for="pName">이름</label>
                 <input type="text" th:field="*{pName}" id="pName" name="pName" placeholder="상품이름 입력">
             </div>
             <div>
