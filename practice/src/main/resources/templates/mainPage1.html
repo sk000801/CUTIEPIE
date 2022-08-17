@@ -79,15 +79,96 @@
         height: 52px;
     }
 
-    .product_display {
-        width: 400%;
-        height: 27vh;
-        display: flex;
-        flex-direction: row;
+    #bannerWrapper {
+      position: relative;
     }
-
-    .scroll-horizon {
-        width: 100%;
+    #imageContainer {
+      width: 100vw;
+      height: 27vh;
+      position: relative;
+    }
+    #item1 {
+      width: 100%;
+      height: 100%;
+      background-image: url("/image/1.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+    #item2 {
+      width: 100%;
+      height: 100%;
+      background-image: url("/image/2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    #item3 {
+      width: 100%;
+      height: 100%;
+      background-image: url("/image/3.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    #leftBtn {
+      width: 50px;
+      height: 70px;
+      display: flex;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 5;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      cursor: pointer;
+    }
+    #rightBtn {
+      width: 50px;
+      height: 70px;
+      display: flex;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 5;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      cursor: pointer;
+    }
+    .filter {
+      transition: 0.2s -webkit-filter linear;
+      filter: blur(6px);
+    }
+    .unFilter {
+      transition: 0.2s -webkit-filter linear;
+      filter: blur(0px);
     }
 
     .scroll {
@@ -143,11 +224,14 @@
         <a href="/products/down" class="page">하의</a>
         <a href="/products/else" class="page">악세서리</a>
     </div>
-    <div class="product_display">
-        <div class="scroll-horizon">1</div>
-        <div class="scroll-horizon">2</div>
-        <div class="scroll-horizon">3</div>
-        <div class="scroll-horizon">4</div>
+    <div id="bannerWrapper">
+        <div id="imageContainer">
+            <div id="item1">1</div>
+            <div id="item2">2</div>
+            <div id="item3">3</div>
+        </div>
+        <div id="leftBtn"><</div>
+        <div id="rightBtn">></div>
     </div>
     <div class="scroll">
         <div class="scroll-">1</div>
@@ -162,6 +246,68 @@
         <div class="scroll-">3</div>
         <div class="scroll-">4</div>
     </div>
+    <script>
+        let item1 = document.getElementById("item1");
+        let item2 = document.getElementById("item2");
+        let item3 = document.getElementById("item3");
+        let leftBtn = document.getElementById("leftBtn");
+        let rightBtn = document.getElementById("rightBtn");
+        let imageContainer = document.getElementById("imageContainer");
+        let currentBanner = 1;
+
+        leftBtn.addEventListener("click", () => {
+          imageContainer.classList.remove("unFilter");
+          imageContainer.classList.add("filter");
+          setTimeout(() => {
+            if (currentBanner === 1) {
+              item3.style.zIndex = 3;
+              item1.style.zIndex = 2;
+              item2.style.zIndex = 1;
+            } else if (currentBanner === 2) {
+              item1.style.zIndex = 3;
+              item2.style.zIndex = 2;
+              item3.style.zIndex = 1;
+            } else if (currentBanner === 3) {
+              item2.style.zIndex = 3;
+              item1.style.zIndex = 2;
+              item3.style.zIndex = 1;
+            }
+            if (currentBanner === 1) {
+              currentBanner = 3;
+            } else {
+              currentBanner = currentBanner - 1;
+            }
+            imageContainer.classList.remove("filter");
+            imageContainer.classList.add("unFilter");
+          }, 200);
+        });
+        rightBtn.addEventListener("click", () => {
+          imageContainer.classList.remove("unFilter");
+          imageContainer.classList.add("filter");
+          setTimeout(() => {
+            if (currentBanner === 1) {
+              item1.style.zIndex = 2;
+              item2.style.zIndex = 3;
+              item3.style.zIndex = 1;
+            } else if (currentBanner === 2) {
+              item1.style.zIndex = 1;
+              item2.style.zIndex = 2;
+              item3.style.zIndex = 3;
+            } else if (currentBanner === 3) {
+              item1.style.zIndex = 3;
+              item2.style.zIndex = 2;
+              item3.style.zIndex = 1;
+            }
+            if (currentBanner === 3) {
+              currentBanner = 1;
+            } else {
+              currentBanner = currentBanner + 1;
+            }
+            imageContainer.classList.remove("filter");
+            imageContainer.classList.add("unFilter");
+          }, 200);
+        });
+    </script>
 </body>
 </html>
 </http>
