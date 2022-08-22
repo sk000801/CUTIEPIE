@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="members")
@@ -11,10 +12,11 @@ import javax.persistence.*;
 @Setter
 public class Member {
 
+    private UUID uuid = UUID.randomUUID();
+
     @Id
-    @GeneratedValue
     @Column(name="member_id")
-    private Long id;
+    private String id = uuid.toString();
 
     private String pw;
 
