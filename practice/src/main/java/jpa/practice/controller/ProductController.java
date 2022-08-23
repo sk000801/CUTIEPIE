@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping("/admins/pManage/{id}/edit")
-    public String edit(@PathVariable("id") Long id, Model model) {
+    public String edit(@PathVariable("id") String id, Model model) {
         Product product = productService.findId(id);
 
         ProductForm form = new ProductForm();

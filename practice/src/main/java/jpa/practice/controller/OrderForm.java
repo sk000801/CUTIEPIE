@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class OrderForm {
 
-    private Long id;
+    private String id;
 
     private Member member;
 

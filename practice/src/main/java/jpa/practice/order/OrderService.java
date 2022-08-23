@@ -17,7 +17,7 @@ public class OrderService {
         orderRepository.join(order);
     }
 
-    public Order findId(Long id) {
+    public Order findId(String id) {
         return orderRepository.findId(id);
     }
 

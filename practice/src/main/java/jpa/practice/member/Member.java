@@ -1,5 +1,6 @@
 package jpa.practice.member;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Table(name="members")
 @Getter
 @Setter
+@Data
 public class Member {
 
     private UUID uuid = UUID.randomUUID();

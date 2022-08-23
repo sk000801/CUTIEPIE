@@ -16,10 +16,11 @@ import java.util.UUID;
 @Table(name="orders")
 public class Order {
 
+    private UUID uuid = UUID.randomUUID();
+
     @Id
-    @GeneratedValue
     @Column(name="order_id")
-    private Long id;
+    private String id = uuid.toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="member_id")

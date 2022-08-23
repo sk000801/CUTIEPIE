@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="products")
@@ -11,10 +12,11 @@ import javax.persistence.*;
 @Setter
 public class Product {
 
+    private UUID uuid = UUID.randomUUID();
+
     @Id
-    @GeneratedValue
     @Column(name="product_id")
-    private Long id;
+    private String id = uuid.toString();
 
     @Column(name="product_name")
     private String name;

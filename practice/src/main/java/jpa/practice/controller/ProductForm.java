@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 public class ProductForm {
 
-    private Long id;
+    private String id;
     @NotEmpty
     private String pName;
 

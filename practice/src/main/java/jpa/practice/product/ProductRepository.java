@@ -24,7 +24,7 @@ public class ProductRepository {
                 .getSingleResult();
     }
 
-    public Product findId(Long id) {
+    public Product findId(String id) {
         return em.find(Product.class, id);
     }
 
