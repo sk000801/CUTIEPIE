@@ -15,8 +15,10 @@ public class Member {
     private UUID uuid = UUID.randomUUID();
 
     @Id
-    @Column(name="member_id")
     private String id = uuid.toString();
+
+    @Column(name="member_id")
+    private String memberId;
 
     private String pw;
 

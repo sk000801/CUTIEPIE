@@ -12,12 +12,12 @@ public class MemberSessionRepository {
     private static Map<String, Member> store = new HashMap<>();
 
     public void save(Member member) {
-        store.put(member.getId(), member);
+        store.put(member.getMemberId(), member);
     }
 
     public Optional<Member> findById(String id) {
         return findAll().stream()
-                .filter(m -> m.getId().equals(id)).findFirst();
+                .filter(m -> m.getMemberId().equals(id)).findFirst();
     }
 
     public List<Member> findAll() {
