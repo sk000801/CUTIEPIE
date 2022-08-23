@@ -4,6 +4,7 @@ import jpa.practice.SessionManager;
 import jpa.practice.member.Member;
 import jpa.practice.member.MemberSessionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -42,7 +44,7 @@ public class LoginController {
 
         sessionManager.createSession(logMember, response);
 
-        return "redirect:/";
+        return "redirect:/mainPage1";
     }
 
     @PostMapping("/members/logout")
@@ -51,6 +53,6 @@ public class LoginController {
         if(session != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return "redirect:/mainPage1";
     }
 }
