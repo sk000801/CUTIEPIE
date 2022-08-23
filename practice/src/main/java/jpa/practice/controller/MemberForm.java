@@ -9,7 +9,9 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 public class MemberForm {
+    @NotEmpty
     private String id;
+    @NotEmpty
     private String pw;
     @NotEmpty
     private String name;
