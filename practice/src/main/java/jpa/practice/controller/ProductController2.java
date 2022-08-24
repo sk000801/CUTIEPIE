@@ -4,6 +4,7 @@ import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ public class ProductController2 {
     private final ProductService productService;
 
     @ResponseBody
-    @RequestMapping("/products/list")
+    @RequestMapping(method = RequestMethod.GET, path="/products/list")
     public List<Product> list() {
         List<Product> lists = productService.findAll();
 
