@@ -12,11 +12,9 @@ import java.util.UUID;
 @Setter
 public class Product {
 
-    private UUID uuid = UUID.randomUUID();
-
     @Id
     @Column(name="product_id")
-    private String id = uuid.toString();
+    private String id = UUID.randomUUID().toString();
 
     @Column(name="product_name")
     private String name;
