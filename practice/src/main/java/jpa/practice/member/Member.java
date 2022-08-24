@@ -14,10 +14,9 @@ import java.util.UUID;
 @Data
 public class Member {
 
-    private UUID uuid = UUID.randomUUID();
-
     @Id
-    private String id = uuid.toString();
+    @Column(name="id")
+    private String id = UUID.randomUUID().toString();
 
     @Column(name="member_id")
     private String memberId;

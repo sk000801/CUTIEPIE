@@ -16,11 +16,9 @@ import java.util.UUID;
 @Table(name="orders")
 public class Order {
 
-    private UUID uuid = UUID.randomUUID();
-
     @Id
     @Column(name="order_id")
-    private String id = uuid.toString();
+    private String id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="member_id")
