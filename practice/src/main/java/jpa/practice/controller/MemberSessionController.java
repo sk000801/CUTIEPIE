@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/members")
 //모든 매핑은 member를 상속함! 다는 의미래용
 public class MemberSessionController {
 

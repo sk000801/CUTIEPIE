@@ -3,9 +3,11 @@ package jpa.practice.login;
 import jpa.practice.SessionManager;
 import jpa.practice.member.Member;
 import jpa.practice.member.MemberSessionService;
+import jpa.practice.member.MemberStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +33,7 @@ public class LoginController {
 
     @PostMapping("/members/login")
     public String login2(@Valid @ModelAttribute  LoginForm form, BindingResult b
-                , HttpServletResponse response) {
+                , HttpServletResponse response, Model model) {
 
         if(b.hasErrors()) return "members/loginMember";
 
@@ -42,9 +44,21 @@ public class LoginController {
             return "members/loginMember";
         }
 
+        String a = null;
+
+        if(logMember.getStatus() == MemberStatus.member) {
+            a = "mainPage2";
+        }
+
+        if(logMember.getStatus() == MemberStatus.admin) {
+            a = "mainPage3";
+        }
+
+        model.addAttribute("member", logMember);
+
         sessionManager.createSession(logMember, response);
 
-        return "redirect:/mainPage1";
+        return a;
     }
 
     @PostMapping("/members/logout")
@@ -53,6 +67,6 @@ public class LoginController {
         if(session != null) {
             session.invalidate();
         }
-        return "redirect:/mainPage1";
+        return "mainPage1";
     }
 }
