@@ -15,7 +15,6 @@ import java.util.UUID;
 public class Member {
 
     @Id
-    @Column(name="id")
     private String id = UUID.randomUUID().toString();
 
     @Column(name="member_id")

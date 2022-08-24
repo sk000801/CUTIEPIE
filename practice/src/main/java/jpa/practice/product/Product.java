@@ -13,7 +13,6 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @Column(name="product_id")
     private String id = UUID.randomUUID().toString();
 
     @Column(name="product_name")

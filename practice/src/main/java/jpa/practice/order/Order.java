@@ -17,7 +17,6 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @Column(name="order_id")
     private String id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
