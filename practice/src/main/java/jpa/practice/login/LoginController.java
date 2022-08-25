@@ -7,6 +7,7 @@ import jpa.practice.member.MemberStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class LoginController {
 
     private final LoginRepository loginRepository;
