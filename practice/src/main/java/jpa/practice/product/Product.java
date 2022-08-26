@@ -1,5 +1,6 @@
 package jpa.practice.product;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Table(name="products")
 @Getter
 @Setter
+@Data
 public class Product {
 
     @Id

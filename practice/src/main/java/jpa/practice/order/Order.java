@@ -2,6 +2,7 @@ package jpa.practice.order;
 
 import jpa.practice.member.Member;
 import jpa.practice.product.Product;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name="orders")
+@Data
 public class Order {
 
     @Id
