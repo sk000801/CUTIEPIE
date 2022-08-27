@@ -9,13 +9,13 @@ public class SqlTest {
     public static void main(String[] args) {
         Connection con = null;
 
-        String server = "localhost"; // 서버 주소
+        String server = "localhost:3305"; // 서버 주소
         String user_name = "root"; //  접속자 id
-        String password = "111111"; // 접속자 pw
+        String password = "judyserver0801*"; // 접속자 pw
 
         // JDBC 드라이버 로드
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버를 로드하는데에 문제 발생 " + e.getMessage());
             e.printStackTrace();

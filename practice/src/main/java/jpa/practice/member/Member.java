@@ -22,7 +22,7 @@ public class Member {
 
     private String pw;
 
-    @Column(name="member_name")
+    @Column(name="name")
     private String name;
 
     @Enumerated(EnumType.STRING)
