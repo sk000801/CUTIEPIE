@@ -1,10 +1,12 @@
 package jpa.practice.member;
 
+import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,4 +29,8 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
+
+    private List<Product> bascket;
+
+    private List<Product> likes;
 }
