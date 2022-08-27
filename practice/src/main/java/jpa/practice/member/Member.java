@@ -22,6 +22,7 @@ public class Member {
     @Column(name="member_id")
     private String memberId;
 
+    @Column(name="pw")
     private String pw;
 
     @Column(name="name")
@@ -30,7 +31,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
-    private List<Product> bascket;
-
-    private List<Product> likes;
+//    private List<Product> bascket;
+//
+//    private List<Product> likes;
 }
