@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,13 +29,15 @@ public class LoginController {
     private final LoginRepository loginRepository;
     private final SessionManager sessionManager;
 
+    private final EntityManager em;
+
     @GetMapping("/members/login")
     public String login(@ModelAttribute("loginForm") LoginForm form) {
         return "members/loginMember";
     }
 
     @PostMapping("/members/login")
-    public String login2(@Valid @ModelAttribute  LoginForm form, BindingResult b
+    public String login2(@Valid @ModelAttribute LoginForm form, BindingResult b
                 , HttpServletResponse response, Model model) {
 
         if(b.hasErrors()) return "members/loginMember";
@@ -45,6 +48,9 @@ public class LoginController {
             b.reject("loginFail", "아이디 혹은 비밀번호가 틀림!");
             return "members/loginMember";
         }
+
+        System.out.println("멤버 이름: " + logMember.getName());
+        //얘가 위의 if문 위로 올라가면 에러가 뜨는데 if문이 false일 수 밖에 없다고.. 왜 그래..?
 
         String a = null;
 
