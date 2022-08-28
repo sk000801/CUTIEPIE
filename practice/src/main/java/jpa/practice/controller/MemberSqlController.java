@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Data
+@Transactional
 public class MemberSqlController {
 
     private final EntityManager em;
@@ -32,19 +34,14 @@ public class MemberSqlController {
     @PostMapping("/members/join")
     public String join2(MemberForm form) {
 
-        String member_id = form.getMemberId();
-        String pw = form.getPw();
-        String name = form.getName();
-        MemberStatus status = form.getStatus();
-        String status_s = status.toString();
-
-        String jpql = "INSERT INTO members (member_id, pw, name, status) VALUES (" + member_id + ", "
-                + pw + ", " + name + ", " + status_s + ")";
-
-        TypedQuery<Member> query = em.createQuery(jpql, Member.class);
-        //여기를 뭔가 고쳐야 할듯...
-
-        return "redirect:/";
+        em.createNativeQuery("INSERT INTO members (member_id, pw, name, status) VALUES (?, ?, ?, ?)")
+                .setParameter(1, form.getMemberId())
+                .setParameter(2, form.getPw())
+                .setParameter(3, form.getName())
+                .setParameter(4, form.getStatus().toString())
+                .executeUpdate();
+        
+        return "mainPage1";
     }
 
 //    @GetMapping("/members/login")
