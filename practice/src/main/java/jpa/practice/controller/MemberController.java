@@ -1,7 +1,7 @@
 //package jpa.practice.controller;
 //
 //import jpa.practice.member.Member;
-//import jpa.practice.member.MemberService;
+////import jpa.practice.member.MemberService;
 //import jpa.practice.member.MemberStatus;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.stereotype.Controller;
@@ -28,34 +28,35 @@
 //    @PostMapping("/members/join")
 //    public String join2(MemberForm form) {
 //        Member member = new Member();
+//        member.setMemberId(form.getMemberId());
 //        member.setName(form.getName());
 //        member.setPw(form.getPw());
 //        member.setStatus(form.getStatus());
 //
 //        memberService.join(member);
-//        return "redirect:/";
+//        return "mainPage1";
 //    }
 //
-////    @GetMapping("/members/login")
-////    public String login(Model model) {
-////        model.addAttribute("form", new MemberForm());
-////        return "members/loginMember";
-////    }
-////
-////    @PostMapping("/members/login")
-////    public String login2(MemberForm form, Model model) {
-////        Member member = memberService.findName(form.getName());
-////        model.addAttribute("member", member);
-////
-////        String a = null;
-////        if(member.getStatus() == MemberStatus.member) {
-////            a = "mainPage2";
-////        }
-////        else if(member.getStatus() == MemberStatus.admin) {
-////            a = "mainPage3";
-////        }
-////        return a;
-////    }
+//    @GetMapping("/members/login")
+//    public String login(Model model) {
+//        model.addAttribute("form", new MemberForm());
+//        return "members/loginMember";
+//    }
+//
+//    @PostMapping("/members/login")
+//    public String login2(MemberForm form, Model model) {
+//        Member member = memberService.findName(form.getName());
+//        model.addAttribute("member", member);
+//
+//        String a = null;
+//        if(member.getStatus() == MemberStatus.member) {
+//            a = "mainPage2";
+//        }
+//        else if(member.getStatus() == MemberStatus.admin) {
+//            a = "mainPage3";
+//        }
+//        return a;
+//    }
 //
 //    @GetMapping("/members/list")
 //    public String list(Model model) {

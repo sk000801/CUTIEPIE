@@ -17,32 +17,32 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Controller
-@RequiredArgsConstructor
-@Data
-@Transactional
-public class MemberSqlController {
-
-    private final EntityManager em;
-
-    @GetMapping("/members/join")
-    public String join(Model model) {
-        model.addAttribute("form", new MemberForm());
-        return "members/joinMember";
-    }
-
-    @PostMapping("/members/join")
-    public String join2(MemberForm form) {
-
-        em.createNativeQuery("INSERT INTO members (member_id, pw, name, status) VALUES (?, ?, ?, ?)")
-                .setParameter(1, form.getMemberId())
-                .setParameter(2, form.getPw())
-                .setParameter(3, form.getName())
-                .setParameter(4, form.getStatus().toString())
-                .executeUpdate();
-        
-        return "mainPage1";
-    }
+//@Controller
+//@RequiredArgsConstructor
+//@Data
+//@Transactional
+//public class MemberSqlController {
+//
+//    private final EntityManager em;
+//
+//    @GetMapping("/members/join")
+//    public String join(Model model) {
+//        model.addAttribute("form", new MemberForm());
+//        return "members/joinMember";
+//    }
+//
+//    @PostMapping("/members/join")
+//    public String join2(MemberForm form) {
+//
+//        em.createNativeQuery("INSERT INTO members (member_id, pw, name, status) VALUES (?, ?, ?, ?)")
+//                .setParameter(1, form.getMemberId())
+//                .setParameter(2, form.getPw())
+//                .setParameter(3, form.getName())
+//                .setParameter(4, form.getStatus().toString())
+//                .executeUpdate();
+//
+//        return "mainPage1";
+//    }
 
 //    @GetMapping("/members/login")
 //    public String login(Model model) {
@@ -78,4 +78,4 @@ public class MemberSqlController {
 //        model.addAttribute("members", results);
 //        return "members/memberSearch";
 //    }
-}
+//}
