@@ -20,8 +20,8 @@ public class MemberRepository {
     }
 
     public Member findOne(String memberId) {
-        return em.createQuery("select m from Member m where m.memberId = :memberId", Member.class)
-                .setParameter("memberId", memberId)
+        return em.createQuery("select m from Member as m where m.memberId = :member_id", Member.class)
+                .setParameter("member_id", memberId)
                 .getSingleResult();
     }
 

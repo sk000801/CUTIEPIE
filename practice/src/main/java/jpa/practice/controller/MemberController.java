@@ -49,7 +49,9 @@ public class MemberController {
 
     @PostMapping("/members/login")
     public String login2(LoginForm form, Model model) {
+
         Member member = memberService.findOne(form.getMemberId());
+
         if(member == null) {
             return "members/loginMember";
         }
