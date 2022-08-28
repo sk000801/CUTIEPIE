@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,7 +56,7 @@ public class MemberController {
         if(member == null) {
             return "members/loginMember";
         }
-        if(member.getPw() != form.getPw()) {
+        if(!Objects.equals(member.getPw(), form.getPw())) {
             return "members/loginMember";
         }
 
