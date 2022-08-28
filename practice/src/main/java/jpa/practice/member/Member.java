@@ -19,7 +19,7 @@ public class Member {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(name="member_id")
+    @Column(name="memberId")
     private String memberId;
 
     @Column(name="pw")
