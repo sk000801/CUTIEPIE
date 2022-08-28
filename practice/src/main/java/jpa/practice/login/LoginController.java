@@ -49,9 +49,6 @@ public class LoginController {
             return "members/loginMember";
         }
 
-        System.out.println("멤버 이름: " + logMember.getName());
-        //얘가 위의 if문 위로 올라가면 에러가 뜨는데 if문이 false일 수 밖에 없다고.. 왜 그래..?
-
         String a = null;
 
         if(logMember.getStatus() == MemberStatus.member) {

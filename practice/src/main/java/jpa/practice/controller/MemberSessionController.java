@@ -21,7 +21,7 @@ import javax.validation.Valid;
 //모든 매핑은 member를 상속함! 다는 의미래용
 public class MemberSessionController {
 
-    private final MemberSessionService memberService;
+    private final MemberSessionService memberSessionService;
 
     private final EntityManager em;
 
@@ -35,7 +35,7 @@ public class MemberSessionController {
         if(b.hasErrors()) {
             return "members/joinMember";
         }
-        memberService.save(member);
+        memberSessionService.save(member);
         em.persist(member);
         return "redirect:/";
     }
