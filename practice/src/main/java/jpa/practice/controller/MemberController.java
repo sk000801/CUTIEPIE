@@ -70,16 +70,16 @@ public class MemberController {
     }
 
     @GetMapping("/members/search")
-    public String search(Model model, @RequestParam(value="name", required = false) String name) {
-        List<Member> results = memberService.findAll();
+    public String search(Model model, @RequestParam(name="name", required = false) String name) {
+        List<Member> results;
+        if(name != null) {
+            results = memberService.search(name);
+        }
+        else {
+            results = memberService.findAll();
+        }
         model.addAttribute("members", results);
         return "members/memberSearch";
     }
 
-//    @GetMapping("/members/search/?name={name}")
-//    public String search2(Model model, @RequestParam(value="name", required = false) String name) {
-//        List<Member> results = memberService.search(name);
-//        model.addAttribute("members", results);
-//        return "members/memberSearch";
-//    }
 }
