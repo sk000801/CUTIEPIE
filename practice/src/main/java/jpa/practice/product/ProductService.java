@@ -18,11 +18,7 @@ public class ProductService {
         return productRepository.findId(id);
     }
 
-    public Product findName(String name) {
-        return productRepository.findName(name);
-    }
-
-    public List<Product> searchProduct(String name) {
+    public List<Product> findName(String name) {
         return productRepository.findProduct(name);
     }
 

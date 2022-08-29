@@ -2,6 +2,12 @@
 <http xmlns:th="http://www.thymeleaf.org">
     <body>
     <div>
+        <form method="get" action="/admins/pManage/search">
+            <input type="text" name="name" placeholder="회원명" />
+            <button type="submit">검색</button>
+        </form>
+    </div>
+    <div>
         <table>
             <thead>
             <tr>

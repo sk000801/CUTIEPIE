@@ -1,5 +1,6 @@
 package jpa.practice.controller;
 
+import jpa.practice.member.Member;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -63,6 +65,19 @@ public class ProductController {
 
         productService.join(product);
         return "redirect:/admins/pManage";
+    }
+
+    @GetMapping("/admins/pManage/search")
+    public String search(@RequestParam(name="name", required = false) String name, Model model) {
+        List<Product> results;
+        if(name != null) {
+            results = productService.findName(name);
+        }
+        else {
+            results = productService.findAll();
+        }
+        model.addAttribute("members", results);
+        return "products/productList";
     }
 
 }
