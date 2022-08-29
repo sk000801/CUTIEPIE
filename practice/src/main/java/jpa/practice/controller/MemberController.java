@@ -72,17 +72,18 @@ public class MemberController {
         return a;
     }
 
-    @GetMapping("/members/list")
-    public String list(Model model) {
+    @GetMapping("/members/search")
+    public String search(Model model) {
         List<Member> members = memberService.findAll();
         model.addAttribute("members", members);
-        return "members/MemberList";
+        return "members/memberSearch";
     }
 
-    @GetMapping("/members/search")
-    public String search(@ModelAttribute("name") String name, Model model) {
+    @PostMapping("/members/search")
+    public String search2(@ModelAttribute("name") String name, Model model) {
         List<Member> results = memberService.search(name);
         model.addAttribute("members", results);
         return "members/memberSearch";
     }
+
 }
