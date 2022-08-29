@@ -82,4 +82,30 @@ public class MemberController {
         return "members/memberSearch";
     }
 
+    @GetMapping("/members/edit/{id}")
+    public String edit(Model model, @PathVariable("id") String id) {
+        Member member = memberService.findById(id);
+
+        MemberForm form = new MemberForm();
+
+        form.setMemberId(member.getMemberId());
+        form.setName(member.getName());
+        form.setPw(member.getPw());
+
+        model.addAttribute("form", form);
+        return "members/editMember";
+    }
+
+    @PostMapping("/members/edit/{id}")
+    public String edit2(MemberForm form) {
+        Member member = new Member();
+
+        member.setMemberId(form.getMemberId());
+        member.setPw(form.getPw());
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "mainPage2";
+    }
 }

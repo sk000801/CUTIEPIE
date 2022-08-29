@@ -16,7 +16,14 @@ public class MemberRepository {
     private final EntityManager em;
 
     public void join(Member member) {
+        if(member != null) {
+            em.merge(member);
+        }
         em.persist(member);
+    }
+
+    public Member findById(String id) {
+        return em.find(Member.class, id);
     }
 
     public Member findOne(String memberId) {
