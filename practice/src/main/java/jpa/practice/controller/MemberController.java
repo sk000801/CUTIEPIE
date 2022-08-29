@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -73,17 +70,16 @@ public class MemberController {
     }
 
     @GetMapping("/members/search")
-    public String search(Model model) {
-        List<Member> members = memberService.findAll();
-        model.addAttribute("members", members);
-        return "members/memberSearch";
-    }
-
-    @PostMapping("/members/search")
-    public String search2(@ModelAttribute("name") String name, Model model) {
-        List<Member> results = memberService.search(name);
+    public String search(Model model, @RequestParam(value="name", required = false) String name) {
+        List<Member> results = memberService.findAll();
         model.addAttribute("members", results);
         return "members/memberSearch";
     }
 
+//    @GetMapping("/members/search/?name={name}")
+//    public String search2(Model model, @RequestParam(value="name", required = false) String name) {
+//        List<Member> results = memberService.search(name);
+//        model.addAttribute("members", results);
+//        return "members/memberSearch";
+//    }
 }
