@@ -11,8 +11,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name="members")
-@Getter
-@Setter
 @Data
 public class Member {
 

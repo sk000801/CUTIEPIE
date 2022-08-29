@@ -13,8 +13,6 @@ import java.util.UUID;
 
 import java.sql.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name="orders")
 @Data

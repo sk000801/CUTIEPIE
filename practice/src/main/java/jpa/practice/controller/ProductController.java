@@ -65,10 +65,4 @@ public class ProductController {
         return "redirect:/admins/pManage";
     }
 
-//    @GetMapping("/admins/pManage/list")
-//    public String list(Model model) {
-//        List<Product> products = productService.findAll();
-//        model.addAttribute("products", products);
-//        return "products/productList";
-//    }
 }
