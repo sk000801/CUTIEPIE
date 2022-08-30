@@ -6,11 +6,13 @@ import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -29,12 +31,19 @@ public class ProductController {
         return "products/joinProduct";
     }
 
-    @PostMapping("/admins/pManage/join")
-    public String join2(ProductForm form) {
+    //@PostMapping("/admins/pManage/join")
+    @RequestMapping(path="/admins/pManage/join", method=RequestMethod.POST)
+    public String join2(ProductForm form, @RequestParam("file") MultipartFile file) throws IOException {
         Product product = new Product();
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
+        product.setOriginal_name(file.getOriginalFilename());
+
+        if(!file.isEmpty()) {
+            String path="D:/backend_git6/JPA_practice_small/practice/src/main/java/jpa/practice/image";
+            file.transferTo(new File(path));
+        }
 
         productService.join(product);
         return "redirect:/admins/pManage";

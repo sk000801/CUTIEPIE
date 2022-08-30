@@ -2,9 +2,9 @@
 <http xmlns:th="http://www.thymeleaf.org">
     <body>
     <div>
-        <form action="/admins/pManage/join" method="post">
+        <form action="/admins/pManage/join" method="post" enctype="mutipart/form-data">
             <div>
-                <label for="pName">고객 이름</label>
+                <label for="pName">상품 이름</label>
                 <input type="text" id="pName" name="pName" placeholder="상품이름 입력">
             </div>
             <div>
@@ -14,6 +14,10 @@
             <div>
                 <label for="stock">재고</label>
                 <input type="text" id="stock" name="stock" placeholder="재고 입력">
+            </div>
+            <div>
+                <label for="file">상품 사진</label>
+                <input type="file" id="file" name="file" placeholder="사진 넣기">
             </div>
             <button type="submit">등록</button>
         </form>
