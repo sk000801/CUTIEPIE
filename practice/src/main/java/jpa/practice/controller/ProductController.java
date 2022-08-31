@@ -1,16 +1,17 @@
 package jpa.practice.controller;
 
-import jpa.practice.member.Member;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.String;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -38,12 +39,18 @@ public class ProductController {
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
-        product.setOriginal_name(file.getOriginalFilename());
+        product.setFilename(file.getOriginalFilename());
+        //product.setFile(form.getFile());
 
-        if(!file.isEmpty()) {
-            String path="D:/backend_git6/JPA_practice_small/practice/src/main/java/jpa/practice/image";
-            file.transferTo(new File(path));
-        }
+        String path = "D:/image";
+
+        String filename = path + file.getOriginalFilename();
+        FileCopyUtils.copy(file.getBytes(), new File(filename));
+
+//        if(!file.isEmpty()) {
+//            String path="D:/backend_git6/JPA_practice_small/practice/src/main/java/jpa/practice/image";
+//            file.transferTo(new File(path));
+//        }
 
         productService.join(product);
         return "redirect:/admins/pManage";

@@ -2,7 +2,7 @@
 <http xmlns:th="http://www.thymeleaf.org">
     <body>
     <div>
-        <form action="/admins/pManage/join" method="post" enctype="mutipart/form-data">
+        <form onsubmit="(event)=>{console.log(event.target)}" action="/admins/pManage/join" method="post" enctype="mutipart/form-data" id="form">
             <div>
                 <label for="pName">상품 이름</label>
                 <input type="text" id="pName" name="pName" placeholder="상품이름 입력">
@@ -22,5 +22,9 @@
             <button type="submit">등록</button>
         </form>
     </div>
+    <script>
+        let form = document.getElementById('form')
+        form.addEventListener('submit',(event)=>{console.log(event.target)})
+    </script>
     </body>
 </http>
