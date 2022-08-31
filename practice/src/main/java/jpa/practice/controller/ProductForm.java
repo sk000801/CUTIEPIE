@@ -20,4 +20,6 @@ public class ProductForm {
     private int stock;
 
     private MultipartFile file;
+
+    private String newfile;
 }

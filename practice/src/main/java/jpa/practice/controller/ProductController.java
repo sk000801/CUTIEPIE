@@ -32,14 +32,14 @@ public class ProductController {
         return "products/joinProduct";
     }
 
-    //@PostMapping("/admins/pManage/join")
-    @RequestMapping(path="/admins/pManage/join", method=RequestMethod.POST)
+    @PostMapping("/admins/pManage/join")
+//    @RequestMapping(path="/admins/pManage/join", method=RequestMethod.POST)
     public String join2(ProductForm form, @RequestParam(value="file", required = false) MultipartFile file) throws IOException {
         Product product = new Product();
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
-        product.setFilename(file.getOriginalFilename());
+        product.setFilename(form.getNewfile());
         //product.setFile(form.getFile());
 
         String path = "D:/image/";
