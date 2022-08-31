@@ -26,6 +26,7 @@ public class Product {
     @Column(name="product_price")
     private int price;
 
+    @Column(name="filename")
     private String filename;
 
     public void addStock(int number) {
