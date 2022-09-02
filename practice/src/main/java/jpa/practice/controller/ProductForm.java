@@ -23,4 +23,6 @@ public class ProductForm {
 
     private String filename;
 
+    private String original_name;
+
 }

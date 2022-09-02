@@ -1,6 +1,7 @@
 package jpa.practice.controller;
 
 import jpa.practice.product.Product;
+import jpa.practice.product.ProductImage;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,12 @@ public class ProductController {
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
+
+        ProductImage productImage = new ProductImage();
+        productImage.setFilename(form.getFilename());
+        productImage.setOriginal_name(file.getOriginalFilename());
+
+        product.setProductImage(productImage);
         //product.setFilename(form.getFilename());
         //product.setFile(form.getFile());
 
@@ -46,11 +53,6 @@ public class ProductController {
 
         String filename = path + file.getOriginalFilename();
         FileCopyUtils.copy(file.getBytes(), new File(filename));
-
-//        if(!file.isEmpty()) {
-//            String path="D:/backend_git6/JPA_practice_small/practice/src/main/java/jpa/practice/image";
-//            file.transferTo(new File(path));
-//        }
 
         productService.join(product);
         return "redirect:/admins/pManage";
