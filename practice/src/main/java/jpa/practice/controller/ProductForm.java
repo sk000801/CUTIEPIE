@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.JoinTable;
 import javax.validation.constraints.NotEmpty;
 import java.io.File;
 
@@ -12,6 +13,7 @@ import java.io.File;
 public class ProductForm {
 
     private String id;
+
     @NotEmpty
     private String pName;
 
@@ -19,7 +21,6 @@ public class ProductForm {
 
     private int stock;
 
-    private MultipartFile file;
+    private String filename;
 
-    private String newfile;
 }

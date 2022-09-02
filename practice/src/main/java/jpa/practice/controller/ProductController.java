@@ -39,7 +39,7 @@ public class ProductController {
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
-        product.setFilename(form.getNewfile());
+        //product.setFilename(form.getFilename());
         //product.setFile(form.getFile());
 
         String path = "D:/image/";
