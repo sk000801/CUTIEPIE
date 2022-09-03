@@ -15,13 +15,10 @@ import java.util.UUID;
 @Entity
 @Table(name="products")
 @Data
-public class Product implements Persistable<String> {
+public class Product {
 
     @Id
     private String id = UUID.randomUUID().toString();
-
-    @CreatedDate
-    private LocalDateTime createdDate;
 
     @Column(name="product_name")
     private String name;
@@ -33,8 +30,10 @@ public class Product implements Persistable<String> {
     private int price;
 
     @OneToOne
-    @JoinColumn(name="image_id")
-    private ProductImage productImage;
+    @JoinTable(name="product_image",
+                joinColumns = @JoinColumn(name="id"),
+                inverseJoinColumns = @JoinColumn(name="filename"))
+    private ImageStore imageStore;
 
     public void addStock(int number) {
         stock += number;
@@ -44,8 +43,4 @@ public class Product implements Persistable<String> {
         stock -= number;
     }
 
-    @Override
-    public boolean isNew() {
-        return createdDate==null;
-    }
 }

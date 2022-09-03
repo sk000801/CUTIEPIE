@@ -1,5 +1,6 @@
 package jpa.practice.controller;
 
+import jpa.practice.product.ImageStore;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductImage;
 import jpa.practice.product.ProductService;
@@ -42,17 +43,19 @@ public class ProductController {
         product.setStock(form.getStock());
 
         ProductImage productImage = new ProductImage();
-        productImage.setFilename(form.getFilename());
-        productImage.setOriginal_name(file.getOriginalFilename());
+        ImageStore imageStore = productImage.storeFile(form.getFile());
+        imageStore.setStoreFilename(form.getFilename());
+        imageStore.setUploadFilename(form.getOriginal_name());
+        product.setImageStore(imageStore);
 
-        product.setProductImage(productImage);
         //product.setFilename(form.getFilename());
         //product.setFile(form.getFile());
 
-        String path = "D:/image/";
 
-        String filename = path + file.getOriginalFilename();
-        FileCopyUtils.copy(file.getBytes(), new File(filename));
+//         성공했던 이미지 넣어놓는 코드
+//        String path = "D:/image/";
+//        String filename = path + file.getOriginalFilename();
+//        FileCopyUtils.copy(file.getBytes(), new File(filename));
 
         productService.join(product);
         return "redirect:/admins/pManage";
