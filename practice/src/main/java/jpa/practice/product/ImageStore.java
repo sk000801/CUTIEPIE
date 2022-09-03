@@ -12,11 +12,10 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name="product_image")
 public class ImageStore {
 
 //    @Id
-//    private String id = UUID.randomUUID().toString();
+//    private String id;
 
     @Column(name="original_name")
     private String uploadFilename;

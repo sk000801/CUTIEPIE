@@ -1,9 +1,6 @@
 package jpa.practice.controller;
 
-import jpa.practice.product.ImageStore;
-import jpa.practice.product.Product;
-import jpa.practice.product.ProductImage;
-import jpa.practice.product.ProductService;
+import jpa.practice.product.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final ImageRepository imageRepository;
 
     @GetMapping("/admins/pManage")
     public String page() {
@@ -44,8 +42,8 @@ public class ProductController {
 
         ProductImage productImage = new ProductImage();
         ImageStore imageStore = productImage.storeFile(form.getFile());
-        imageStore.setStoreFilename(form.getFilename());
-        imageStore.setUploadFilename(form.getOriginal_name());
+        imageRepository.join(imageStore);
+        //imageStore.setUploadFilename(form.getOriginal_name());
         product.setImageStore(imageStore);
 
         //product.setFilename(form.getFilename());

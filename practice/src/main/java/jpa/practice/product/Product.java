@@ -8,6 +8,7 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -23,8 +23,5 @@ public class ProductForm {
 
     private MultipartFile file;
 
-    private String filename;
-
-    private String original_name;
 
 }
