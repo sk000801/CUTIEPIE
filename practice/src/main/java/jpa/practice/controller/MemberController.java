@@ -69,6 +69,11 @@ public class MemberController {
         return a;
     }
 
+    @GetMapping("/members/logout")
+    public String logout() {
+        return "mainPage1";
+    }
+
     @GetMapping("/members/search")
     public String search(Model model, @RequestParam(name="name", required = false) String name) {
         List<Member> results;
