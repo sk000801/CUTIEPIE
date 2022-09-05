@@ -49,4 +49,30 @@ ex. 항목들 옆으로 넘기기, 위에 배너 스크롤 내려도 고정
 
 <br>
 
-~~※ 나중에 그림 수정!! 배너 아래에 쇼핑몰 이름 적어놔야함~~
+
+#### 힘들었던 문제들
+
+1)
+
+![이미지](./image/끄적-3.jpg)
+
+:boom: 
+<br>
+이게 너무 힘들었다 
+
+```java
+        em.merge(product)
+```
+이 코드 한 줄만 수정했으면 끝날 일이었다...  
+<br>
+물론 새로운 상품을 등록할 때는 merge함수가 좋지 않지만 여기서는
+imageStore의 내용을 옮기기 위해 미리 생성해놓은 product 빈 생성자에 내용을 set시켜놓고
+join함수를 사용하려다가 발생한 문제이므로....
+
+그 죽일놈의 
+```java
+A different object with the same identifier value was already associated with the session
+```
+오류 때문에........
+<br>
+이 친구는 블로그에도 한번 정리할 계획이다.. 다양한 오류들을 많이 만나서..
