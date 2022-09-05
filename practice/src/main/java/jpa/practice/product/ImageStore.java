@@ -17,9 +17,8 @@ import java.util.UUID;
 public class ImageStore {
 
     @Id
-    @GeneratedValue
     @Column(name="image_id")
-    private String image_id;
+    private String image_id = UUID.randomUUID().toString();
 
     @Column(name="original_name")
     private String uploadFilename;

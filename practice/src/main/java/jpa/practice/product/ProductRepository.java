@@ -15,10 +15,11 @@ public class ProductRepository {
     private final EntityManager em;
 
     public void join(Product product) {
-        if(product != null) {
-            em.merge(product);
-        }
-        em.persist(product);
+//        if(product != null) {
+//            em.merge(product);
+//        }
+//        em.persist(product);
+        em.merge(product);
     }
 
     public Product findName(String name) {
