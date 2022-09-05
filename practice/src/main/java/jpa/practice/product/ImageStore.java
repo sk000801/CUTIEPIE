@@ -2,15 +2,24 @@ package jpa.practice.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-@Component
+@Entity
+@NoArgsConstructor
 public class ImageStore {
+
+    @Id
+    @GeneratedValue
+    @Column(name="image_id")
+    private String image_id;
 
     @Column(name="original_name")
     private String uploadFilename;

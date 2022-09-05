@@ -30,8 +30,9 @@ public class Product {
     @Column(name="product_price")
     private int price;
 
-    @OneToOne(fetch=FetchType.LAZY, mappedBy = "productImage")
-    private ProductImage productImage;
+    @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name="image_id")
+    private ImageStore imageStore;
 
     public void addStock(int number) {
         stock += number;

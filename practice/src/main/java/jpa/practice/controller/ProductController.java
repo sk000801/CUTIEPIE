@@ -14,6 +14,7 @@ import java.lang.String;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,17 +41,23 @@ public class ProductController {
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
 
-        ProductImage productImage = new ProductImage();
-        productImage.setProduct(product);
-        ImageStore imageStore = productImage.storeFile(form.getFile());
-        imageRepository.join(imageStore);
-        //imageStore.setUploadFilename(form.getOriginal_name());
-        product.setProductImage(productImage);
+        if (file.isEmpty()) return null;
 
-//         성공했던 이미지 넣어놓는 코드
-//        String path = "D:/image/";
-//        String filename = path + file.getOriginalFilename();
-//        FileCopyUtils.copy(file.getBytes(), new File(filename));
+
+        ProductImage productImage = new ProductImage();
+        ImageStore imageStore = new ImageStore();
+
+        String originalFilename = file.getOriginalFilename();
+        String storeFilename = UUID.randomUUID() +"."+productImage.extractExt(originalFilename);
+        imageStore.setStoreFilename(storeFilename);
+        imageStore.setUploadFilename(originalFilename);
+
+                //파일 저장
+        file.transferTo(new File(productImage.getFullPath(storeFilename)));
+
+        //imageRepository.join(imageStore);
+
+        product.setImageStore(imageStore);
 
         productService.join(product);
         return "redirect:/admins/pManage";

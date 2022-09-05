@@ -12,7 +12,6 @@ import java.io.File;
 @Setter
 public class ProductForm {
 
-    //private String id;
 
     @NotEmpty
     private String pName;
