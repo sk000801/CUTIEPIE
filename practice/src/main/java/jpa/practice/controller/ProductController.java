@@ -41,14 +41,11 @@ public class ProductController {
         product.setStock(form.getStock());
 
         ProductImage productImage = new ProductImage();
+        productImage.setProduct(product);
         ImageStore imageStore = productImage.storeFile(form.getFile());
         imageRepository.join(imageStore);
         //imageStore.setUploadFilename(form.getOriginal_name());
-        product.setImageStore(imageStore);
-
-        //product.setFilename(form.getFilename());
-        //product.setFile(form.getFile());
-
+        product.setProductImage(productImage);
 
 //         성공했던 이미지 넣어놓는 코드
 //        String path = "D:/image/";
@@ -65,7 +62,6 @@ public class ProductController {
 
         ProductForm form = new ProductForm();
 
-        form.setId(product.getId());
         form.setPName(product.getName());
         form.setPrice(product.getPrice());
         form.setStock(product.getStock());

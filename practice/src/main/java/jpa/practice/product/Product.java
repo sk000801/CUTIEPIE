@@ -30,11 +30,8 @@ public class Product {
     @Column(name="product_price")
     private int price;
 
-    @OneToOne
-    @JoinTable(name="product_image",
-                joinColumns = @JoinColumn(name="id"),
-                inverseJoinColumns = @JoinColumn(name="filename"))
-    private ImageStore imageStore;
+    @OneToOne(fetch=FetchType.LAZY, mappedBy = "productImage")
+    private ProductImage productImage;
 
     public void addStock(int number) {
         stock += number;

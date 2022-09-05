@@ -12,16 +12,18 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Data
-@Component
-//@Entity
+@Entity
 //@Table(name="product_image")
 @RequiredArgsConstructor
 public class ProductImage {
 
-//    @Column(name="image_id")
-//    @Id
-//    private String image_id = UUID.randomUUID().toString();
-//
+    @Id
+    private String image_id;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    private Product product;
+
     private final String fileDir = "C:/images/";
 
     public String getFullPath(String filename) {return fileDir+filename;}
