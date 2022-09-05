@@ -56,9 +56,7 @@ ex. 항목들 옆으로 넘기기, 위에 배너 스크롤 내려도 고정
 
 ![이미지](./image/끄적-3.jpg)
 
-:boom: 
-<br>
-이게 너무 힘들었다 
+:boom: 이게 너무 힘들었다 
 
 ```java
         em.merge(product)
@@ -76,3 +74,17 @@ A different object with the same identifier value was already associated with th
 오류 때문에........
 <br>
 이 친구는 블로그에도 한번 정리할 계획이다.. 다양한 오류들을 많이 만나서..
+
+<br>
+<br>
+
+2. 다양한 매핑 관계들
+   :boom: 일대일 단방향 매핑 관계
+```java
+@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.MERGE)
+@JoinColumn(name="image_id")
+```
+단방향이기 때문에 굳이 mappedBy를 써주지는 않았다.
+<br>
+다만 joincolumn에 사용되는 컬럼이 되도록이면 primary key를 사용하는 것 같다.
+
