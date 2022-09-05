@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +30,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
-//    private List<Product> bascket;
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="bascket_id")
+    private List<Product> bascket = new ArrayList<Product>();
 //
 //    private List<Product> likes;
 }
