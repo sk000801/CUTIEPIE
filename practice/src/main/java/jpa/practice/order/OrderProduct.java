@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -15,9 +16,8 @@ import javax.persistence.*;
 public class OrderProduct {
 
     @Id
-    @GeneratedValue
     @Column(name="order_product_id")
-    private Long id;
+    private String id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="product_id")
@@ -34,7 +34,7 @@ public class OrderProduct {
         getProduct().addStock(count);
     }
 
-    public void addProduct() {
+    public void add() {
         getProduct().addStock(count);
     }
 

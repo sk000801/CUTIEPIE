@@ -44,7 +44,7 @@ public class Order {
     }
     public void add() {
         for(OrderProduct orderProduct : lists ) {
-            orderProduct.addProduct();
+            orderProduct.add();
         }
     }
     public int totalPrice() {
