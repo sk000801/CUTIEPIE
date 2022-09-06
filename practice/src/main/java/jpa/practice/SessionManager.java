@@ -20,13 +20,16 @@ public class SessionManager {
 
     public void createSession(Object value, HttpServletResponse response) {
         // 데이터를 생성하는 세션.. 따라서 쿠키에 넣어주는 반응을 해줘야함..?
+        // 세션 id를 생성하고 값을 세션에 저장
         String sId = UUID.randomUUID().toString();
         store.put(sId, value);
 
+        //쿠키 생성
         Cookie myCookie = new Cookie(SESSION_COOKIE, sId);
         response.addCookie(myCookie);
     }
 
+    //세션을 조회하는 코드
     public Object getSession(HttpServletRequest request) {
         Cookie myCookie = findCookie(request, SESSION_COOKIE);
         if(myCookie == null) return null;

@@ -1,5 +1,6 @@
 package jpa.practice.order;
 
+import jpa.practice.SessionManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.List;
 public class OrderRepository {
 
     private final EntityManager em;
+    private final SessionManager sm;
 
     public void join(Order order) {
         em.persist(order);

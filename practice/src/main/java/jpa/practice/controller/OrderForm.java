@@ -10,7 +10,7 @@ public class OrderForm {
 
     private String id;
 
-    private Member member;
+    //private Member member;
 
     private String pName;
 
