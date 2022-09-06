@@ -2,16 +2,16 @@ package jpa.practice.order;
 
 import jpa.practice.controller.ProductForm;
 import jpa.practice.product.Product;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name="order_product")
-//아 이거 내가 정확히 공부 안했나보다ㅠㅠ 기억이 안나ㅠㅠ
+// 상품 종류마다 하나의 객체가 되어 주문서에 들어갈 준비를 마치는 것!
 public class OrderProduct {
 
     @Id
@@ -28,10 +28,13 @@ public class OrderProduct {
     private Order order;
 
     private int price;
-
     private int count;
 
     public void cancel() {
+        getProduct().addStock(count);
+    }
+
+    public void addProduct() {
         getProduct().addStock(count);
     }
 
