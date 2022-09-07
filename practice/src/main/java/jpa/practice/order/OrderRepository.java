@@ -14,10 +14,9 @@ import java.util.List;
 public class OrderRepository {
 
     private final EntityManager em;
-    private final SessionManager sm;
 
     public void join(Order order) {
-        em.persist(order);
+        em.merge(order);
     }
 
     public Order findId(String id) {
