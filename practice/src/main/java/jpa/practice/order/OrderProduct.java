@@ -35,7 +35,7 @@ public class OrderProduct {
     }
 
     public void add() {
-        getProduct().addStock(count);
+        getProduct().removeStock(count);
     }
 
     public int total() {

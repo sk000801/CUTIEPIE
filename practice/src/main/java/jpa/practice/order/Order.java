@@ -20,7 +20,8 @@ import java.sql.*;
 public class Order {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    @Column(name="order_id")
+    private String order_id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="member_id")

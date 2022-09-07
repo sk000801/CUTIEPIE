@@ -9,8 +9,6 @@ public class OrderProductForm {
 
     private String id;
 
-    //private Member member;
-
     private int price;
 
     private int count;

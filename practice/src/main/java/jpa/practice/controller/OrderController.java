@@ -4,6 +4,7 @@ import jpa.practice.SessionManager;
 import jpa.practice.member.Member;
 import jpa.practice.order.Order;
 import jpa.practice.order.OrderProduct;
+import jpa.practice.order.OrderProductRepository;
 import jpa.practice.order.OrderService;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
@@ -24,6 +25,7 @@ public class OrderController {
     private final SessionManager sm;
     private final ProductService productService;
     private final OrderService orderService;
+    private final OrderProductRepository orderProductRepository;
 
     @GetMapping("/orders/join/{id}")
     public String join(@PathVariable("id") String id) {
@@ -42,10 +44,12 @@ public class OrderController {
         orderProduct.setCount(form.getCount());
         Product product = productService.findId(id); //상품 주문시 주문 버튼 클릭하면 상품 정보가 넘어오도록
         orderProduct.setProduct(product);
-
+        orderProductRepository.join(orderProduct);
         order.addOrderProduct(orderProduct);
 
         orderService.join(order);
+
+        order.add();
 
         return "redirect:/";
     }
