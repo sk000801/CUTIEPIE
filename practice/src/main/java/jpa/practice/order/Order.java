@@ -4,6 +4,7 @@ import jpa.practice.member.Member;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,6 +17,7 @@ import java.sql.*;
 @Entity
 @Table(name="orders")
 @Data
+@NoArgsConstructor
 // 여러가지 상품들이 종합된 하나의 주문서
 public class Order {
 
@@ -36,6 +38,15 @@ public class Order {
     public void addOrderProduct(OrderProduct orderProduct) {
         lists.add(orderProduct);
         orderProduct.setOrder(this);
+    }
+
+    public static Order create(Member member, OrderProduct... lists) {
+        Order order = new Order();
+        order.setMember(member);
+        for(OrderProduct orderProduct : lists) {
+            order.addOrderProduct(orderProduct);
+        }
+        return order;
     }
 
     public void cancel() {

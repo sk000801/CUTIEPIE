@@ -34,20 +34,14 @@ public class OrderController {
 
     @PostMapping("/orders/join/{id}")
     public String join2(HttpServletRequest request, OrderProductForm form, @PathVariable("id") String id) {
-        Order order = new Order();
         Member member = (Member) sm.getSession(request);
         //근데 store에서 정보는 어떻게 불러와?
-        order.setMember(member);
 
-        OrderProduct orderProduct = new OrderProduct();
-        orderProduct.setPrice(form.getPrice());
-        orderProduct.setCount(form.getCount());
-        Product product = productService.findId(id); //상품 주문시 주문 버튼 클릭하면 상품 정보가 넘어오도록
-        orderProduct.setProduct(product);
-        orderProductRepository.join(orderProduct);
-        order.addOrderProduct(orderProduct);
+        OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
+        Order order = Order.create(member, orderProduct);
         orderService.join(order);
+        orderProductRepository.join(orderProduct);
 
         order.add();
 
