@@ -14,7 +14,7 @@ public class OrderProductRepository {
     private final EntityManager em;
 
     public void join(OrderProduct orderProduct) {
-        em.persist(orderProduct);
+        em.merge(orderProduct);
         //나중에 orderProduct 수정할 일 생기면 merge로 바꿔주자
     }
 }
