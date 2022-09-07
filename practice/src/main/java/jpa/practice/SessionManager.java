@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
@@ -28,8 +29,7 @@ public class SessionManager {
         Cookie myCookie = new Cookie(SESSION_COOKIE, sId);
         response.addCookie(myCookie);
     }
-
-    //세션을 조회하는 코드
+        //세션을 조회하는 코드
     public Object getSession(HttpServletRequest request) {
         Cookie myCookie = findCookie(request, SESSION_COOKIE);
         if(myCookie == null) return null;

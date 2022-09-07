@@ -12,11 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -35,11 +33,13 @@ public class OrderController {
         return "orders/joinOrder";
     }
 
+    //@SessionAttribute(name="member", required = false) Member member
     @PostMapping("/orders/join/{id}")
-    public String join2(HttpServletRequest request, @Valid OrderProductForm form, @PathVariable("id") String id) {
-        Member member = (Member) sm.getSession(request);
-        //근데 store에서 정보는 어떻게 불러와?
+    public String join2(@CookieValue(value = "mySessionId", required = false) Cookie cookie,
+                        HttpServletRequest request,
+                        @Valid OrderProductForm form, @PathVariable("id") String id) {
 
+        Member member = (Member) sm.getSession(request);
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
         Order order = Order.create(member, orderProduct);

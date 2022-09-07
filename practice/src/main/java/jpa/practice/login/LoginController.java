@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class LoginController {
 
     @PostMapping("/members/login")
     public String login2(@Valid @ModelAttribute LoginForm form, BindingResult b
-                , HttpServletResponse response, Model model) {
+                , HttpServletResponse response, HttpServletRequest request, Model model) {
 
         if(b.hasErrors()) return "members/loginMember";
 
