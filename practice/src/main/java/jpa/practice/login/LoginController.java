@@ -25,19 +25,19 @@ import javax.validation.Valid;
 @Transactional
 public class LoginController {
 
+    @Autowired
+    private final HttpServletRequest request;
     private final LoginRepository loginRepository;
     private final SessionManager sessionManager;
-
-    private final EntityManager em;
 
     @GetMapping("/members/login")
     public String login(@ModelAttribute("loginForm") LoginForm form) {
         return "members/loginMember";
     }
 
-    @PostMapping("/members/login")
+    @RequestMapping(value="/members/login", method = {RequestMethod.POST})
     public String login2(@Valid @ModelAttribute LoginForm form, BindingResult b
-                , HttpServletResponse response, HttpServletRequest request, Model model) {
+                , HttpServletResponse response, Model model) {
 
         if(b.hasErrors()) return "members/loginMember";
 
@@ -58,7 +58,7 @@ public class LoginController {
             a = "mainPage3";
         }
 
-        model.addAttribute("member", member);
+        request.setAttribute("member", member);
 
         sessionManager.createSession(member, response);
         HttpSession session = request.getSession();
@@ -68,7 +68,7 @@ public class LoginController {
     }
 
     @PostMapping("/members/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout() {
         HttpSession session = request.getSession(false);
         if(session != null) {
             session.invalidate();
