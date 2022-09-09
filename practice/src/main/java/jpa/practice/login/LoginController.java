@@ -6,6 +6,7 @@ import jpa.practice.member.MemberSessionService;
 import jpa.practice.member.MemberStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -40,28 +41,28 @@ public class LoginController {
 
         if(b.hasErrors()) return "members/loginMember";
 
-        Member logMember = loginRepository.login(form.getMemberId(), form.getPw());
+        Member member = loginRepository.login(form.getMemberId(), form.getPw());
 
-        if(logMember == null) {
+        if(member == null) {
             b.reject("loginFail", "아이디 혹은 비밀번호가 틀림!");
             return "members/loginMember";
         }
 
         String a = null;
 
-        if(logMember.getStatus() == MemberStatus.member) {
+        if(member.getStatus() == MemberStatus.member) {
             a = "mainPage2";
         }
 
-        if(logMember.getStatus() == MemberStatus.admin) {
+        if(member.getStatus() == MemberStatus.admin) {
             a = "mainPage3";
         }
 
-        model.addAttribute("member", logMember);
+        model.addAttribute("member", member);
 
-        sessionManager.createSession(logMember, response);
+        sessionManager.createSession(member, response);
         HttpSession session = request.getSession();
-        session.setAttribute("member", logMember);
+        session.setAttribute("member", member);
 
         return a;
     }

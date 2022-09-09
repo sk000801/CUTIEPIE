@@ -9,6 +9,7 @@ import jpa.practice.order.OrderService;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ import javax.validation.Valid;
 public class OrderController {
 
     private final SessionManager sm;
+
+    @Autowired
+    private final HttpServletRequest request;
     private final ProductService productService;
     private final OrderService orderService;
     private final OrderProductRepository orderProductRepository;
@@ -37,11 +41,11 @@ public class OrderController {
     //@SessionAttribute(name="member", required = false) Member member
     //@CookieValue(name = "Cookie_1", required = false) Cookie cookie,
     @PostMapping("/orders/join/{id}")
-    public String join2(HttpServletRequest request,
-                        @Valid OrderProductForm form, @PathVariable("id") String id) {
+    public String join2(@Valid OrderProductForm form, @PathVariable("id") String id) {
         HttpSession session = request.getSession();
-        //Member member = (Member) session.getAttribute("member");
-        Member member = (Member) sm.getSession(request);
+        Member member = (Member) session.getAttribute("member");
+//        Member member = (Member) sm.getSession();
+        System.out.println(member.getName());
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
         Order order = Order.create(member, orderProduct);
