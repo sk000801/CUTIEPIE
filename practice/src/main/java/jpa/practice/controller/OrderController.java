@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -34,11 +35,12 @@ public class OrderController {
     }
 
     //@SessionAttribute(name="member", required = false) Member member
+    //@CookieValue(name = "Cookie_1", required = false) Cookie cookie,
     @PostMapping("/orders/join/{id}")
-    public String join2(@CookieValue(value = "mySessionId", required = false) Cookie cookie,
-                        HttpServletRequest request,
+    public String join2(HttpServletRequest request,
                         @Valid OrderProductForm form, @PathVariable("id") String id) {
-
+        HttpSession session = request.getSession();
+        //Member member = (Member) session.getAttribute("member");
         Member member = (Member) sm.getSession(request);
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 

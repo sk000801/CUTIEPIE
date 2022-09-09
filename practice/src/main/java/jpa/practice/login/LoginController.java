@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +60,8 @@ public class LoginController {
         model.addAttribute("member", logMember);
 
         sessionManager.createSession(logMember, response);
+        HttpSession session = request.getSession();
+        session.setAttribute("member", logMember);
 
         return a;
     }
