@@ -8,6 +8,7 @@ import jpa.practice.order.OrderProductRepository;
 import jpa.practice.order.OrderService;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -21,10 +22,14 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
+@SessionAttributes("member")
 public class OrderController {
 
     private final SessionManager sm;
+
+    @Autowired
+    private HttpSession session;
 
     @Autowired
     private final HttpServletRequest request;
@@ -42,10 +47,9 @@ public class OrderController {
     //@CookieValue(name = "Cookie_1", required = false) Cookie cookie,
     @PostMapping("/orders/join/{id}")
     public String join2(@Valid OrderProductForm form, @PathVariable("id") String id) {
-        HttpSession session = request.getSession();
+        session = request.getSession();
         Member member = (Member) session.getAttribute("member");
-//        Member member = (Member) sm.getSession();
-        System.out.println(member.getName());
+
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
         Order order = Order.create(member, orderProduct);

@@ -1,7 +1,10 @@
 package jpa.practice;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +20,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @RequiredArgsConstructor
 @Transactional
+@Data
 public class SessionManager {
-
-    @Autowired
-    private final HttpServletRequest request;
 
     private static final String SESSION_COOKIE = "mySessionId";
 
@@ -37,21 +38,21 @@ public class SessionManager {
         response.addCookie(myCookie);
     }
         //세션을 조회하는 코드
-    public Object getSession() {
-        Cookie myCookie = findCookie(SESSION_COOKIE);
+    public Object getSession(HttpServletRequest request) {
+        Cookie myCookie = findCookie(SESSION_COOKIE, request);
         if(myCookie == null) return null;
         return store.get(myCookie.getValue());
     }
 
-    public void expire() {
+    public void expire(HttpServletRequest request) {
         // 저장된 데이터를 지우는 세션
-        Cookie myCookie = findCookie(SESSION_COOKIE);
+        Cookie myCookie = findCookie(SESSION_COOKIE, request);
         if(myCookie != null) {
             store.remove(myCookie.getValue());
         }
     }
 
-    public Cookie findCookie(String name) {
+    public Cookie findCookie(String name, HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if(cookies == null) return null;
 

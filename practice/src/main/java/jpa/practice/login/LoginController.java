@@ -4,6 +4,7 @@ import jpa.practice.SessionManager;
 import jpa.practice.member.Member;
 import jpa.practice.member.MemberSessionService;
 import jpa.practice.member.MemberStatus;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,14 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Transactional
 public class LoginController {
 
     @Autowired
     private final HttpServletRequest request;
+    @Autowired
+    private HttpSession session;
     private final LoginRepository loginRepository;
     private final SessionManager sessionManager;
 
@@ -43,6 +46,7 @@ public class LoginController {
 
         Member member = loginRepository.login(form.getMemberId(), form.getPw());
 
+
         if(member == null) {
             b.reject("loginFail", "아이디 혹은 비밀번호가 틀림!");
             return "members/loginMember";
@@ -58,10 +62,8 @@ public class LoginController {
             a = "mainPage3";
         }
 
-        request.setAttribute("member", member);
-
         sessionManager.createSession(member, response);
-        HttpSession session = request.getSession();
+        session = request.getSession();
         session.setAttribute("member", member);
 
         return a;
@@ -69,7 +71,7 @@ public class LoginController {
 
     @PostMapping("/members/logout")
     public String logout() {
-        HttpSession session = request.getSession(false);
+        session = request.getSession(false);
         if(session != null) {
             session.invalidate();
         }
