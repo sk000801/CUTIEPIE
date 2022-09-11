@@ -18,7 +18,7 @@ public class MemberSessionService {
         memberRepository.save(member);
     }
 
-    public Optional<Member> findById(String id) {
+    public Member findById(String id) {
         return memberRepository.findById(id);
     }
 
