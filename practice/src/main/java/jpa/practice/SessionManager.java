@@ -18,9 +18,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@RequiredArgsConstructor
-@Transactional
-@Data
 public class SessionManager {
 
     private static final String SESSION_COOKIE = "mySessionId";
@@ -53,8 +50,8 @@ public class SessionManager {
     }
 
     public Cookie findCookie(String name, HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if(cookies == null) return null;
+
+        if(request.getCookies() == null) return null;
 
         return Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().equals(name))

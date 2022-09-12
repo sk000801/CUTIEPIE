@@ -1,31 +1,40 @@
 package jpa.practice.member;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.*;
 
 @Slf4j
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MemberSessionRepository {
 
-    private static final Map<String, Member> store = new HashMap<>();
+    private final EntityManager em;
+    //private static final Map<String, Member> store = new HashMap<>();
 
     public void save(Member member) {
-        store.put(member.getMemberId(), member);
+        em.merge(member); //혹시 모를 수정의 경우에 대비해
+        //store.put(member.getMemberId(), member);
     }
 
     public Member findById(String id) {
-        return store.get(id);
+        //return store.get(id);
+        return em.createQuery("select m from Member m where m.memberId  = :member_id", Member.class)
+                .setParameter("member_id", id)
+                .getSingleResult();
     }
 
     public List<Member> findAll() {
-        return new ArrayList<>(store.values());
+        return em.createQuery("select m from Member as m", Member.class)
+                .getResultList();
+        //return new ArrayList<>(store.values());
     }
 
-    public void clear() {
-        store.clear();
-    }
+//    public void clear() {
+//        store.clear();
+//    }
 }

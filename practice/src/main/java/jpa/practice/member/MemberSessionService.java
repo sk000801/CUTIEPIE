@@ -26,7 +26,7 @@ public class MemberSessionService {
         return memberRepository.findAll();
     }
 
-    public void clear() {
-        memberRepository.clear();
-    }
+//    public void clear() {
+//        memberRepository.clear();
+//    }
 }

@@ -21,8 +21,6 @@ public class MemberSessionController {
 
     private final MemberSessionService memberSessionService;
 
-    private final EntityManager em;
-
     @GetMapping("/add")
     public String joinMember(@ModelAttribute("member") Member member) {
         return "members/joinMember";
@@ -34,7 +32,6 @@ public class MemberSessionController {
             return "members/joinMember";
         }
         memberSessionService.save(member);
-        em.persist(member);
         return "redirect:/";
     }
 
