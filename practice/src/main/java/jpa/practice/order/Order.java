@@ -27,7 +27,7 @@ public class Order {
     private String order_id = UUID.randomUUID().toString();
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="id")
+    @JoinColumn(name="member_id")
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

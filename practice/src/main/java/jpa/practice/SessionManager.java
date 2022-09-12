@@ -34,7 +34,9 @@ public class SessionManager {
         Cookie myCookie = new Cookie(SESSION_COOKIE, sId);
         response.addCookie(myCookie);
     }
-        //세션을 조회하는 코드
+
+
+    //세션을 조회하는 코드
     public Object getSession(HttpServletRequest request) {
         Cookie myCookie = findCookie(SESSION_COOKIE, request);
         if(myCookie == null) return null;

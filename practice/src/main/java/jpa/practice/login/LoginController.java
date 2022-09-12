@@ -33,10 +33,11 @@ public class LoginController {
 
     @GetMapping("/members/login")
     //@CookieValue(name="memberId", required = false) String id
-    public String login(HttpServletRequest request, Model model) {
+    public String login(HttpSession session, HttpServletRequest request, Model model) {
         Member logMember = (Member) sessionManager.getSession(request);
         if (logMember == null) return "members/loginMember";
         model.addAttribute("member", logMember);
+        session.setAttribute("mySessionId", logMember);
 
         String a = null;
 

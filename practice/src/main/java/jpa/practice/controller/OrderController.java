@@ -22,17 +22,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-@AllArgsConstructor
-@SessionAttributes("member")
+@RequiredArgsConstructor
 public class OrderController {
 
-    private final SessionManager sm;
-
-    @Autowired
-    private HttpSession session;
-
-    @Autowired
-    private final HttpServletRequest request;
+    private final SessionManager sessionManager;
     private final ProductService productService;
     private final OrderService orderService;
     private final OrderProductRepository orderProductRepository;
@@ -46,10 +39,11 @@ public class OrderController {
     //@SessionAttribute(name="member", required = false) Member member
     //@CookieValue(name = "Cookie_1", required = false) Cookie cookie,
     @PostMapping("/orders/join/{id}")
-    public String join2(@Valid OrderProductForm form, @PathVariable("id") String id) {
-        session = request.getSession();
-        Member member = (Member) session.getAttribute("member");
+    public String join2(@SessionAttribute(name="mySessionId", required = false) Member member,
+                            @Valid OrderProductForm form, @PathVariable("id") String id,
+                          HttpServletRequest request) {;
 
+        System.out.println("멤버이름 = " + member.getName());
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
         Order order = Order.create(member, orderProduct);
