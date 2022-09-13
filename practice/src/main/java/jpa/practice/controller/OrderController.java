@@ -25,7 +25,6 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final SessionManager sessionManager;
     private final ProductService productService;
     private final OrderService orderService;
     private final OrderProductRepository orderProductRepository;
@@ -36,22 +35,17 @@ public class OrderController {
         return "orders/joinOrder";
     }
 
-    //@SessionAttribute(name="member", required = false) Member member
-    //@CookieValue(name = "Cookie_1", required = false) Cookie cookie,
     @PostMapping("/orders/join/{id}")
     public String join2(@SessionAttribute(name="mySessionId", required = false) Member member,
                             @Valid OrderProductForm form, @PathVariable("id") String id,
                           HttpServletRequest request) {;
 
-        System.out.println("멤버이름 = " + member.getName());
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
 
         Order order = Order.create(member, orderProduct);
         orderService.join(order);
         orderProductRepository.join(orderProduct);
         //이렇게 넣어야 order가 orderProduct에 들어간 채로 em에 저장이 됨
-
-        order.add();
 
         return "redirect:/";
     }

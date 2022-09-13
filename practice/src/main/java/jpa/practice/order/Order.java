@@ -21,7 +21,6 @@ import java.sql.*;
 @NoArgsConstructor
 // 여러가지 상품들이 종합된 하나의 주문서
 public class Order {
-
     @Id
     @Column(name="order_id")
     private String order_id = UUID.randomUUID().toString();

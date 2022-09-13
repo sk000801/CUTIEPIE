@@ -37,6 +37,8 @@ public class OrderProduct {
         orderProduct.setProduct(product);
         orderProduct.setPrice(price);
         orderProduct.setCount(count);
+
+        orderProduct.cancel();
         return orderProduct;
     }
 
