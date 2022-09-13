@@ -53,9 +53,9 @@ public class Order {
         for(OrderProduct orderProduct : lists) {
             orderProduct.cancel();
         }
-    }
+    } //주문을 취소할 땐 이 친구를 써먹으면 그냥 되나...?
     public void add() {
-        for(OrderProduct orderProduct : lists ) {
+        for(OrderProduct orderProduct : lists) {
             orderProduct.add();
         }
     }
