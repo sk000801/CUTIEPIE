@@ -1,4 +1,4 @@
-package jpa.practice.controller;
+package jpa.practice.basket;
 
 import org.springframework.stereotype.Controller;
 

@@ -1,7 +1,6 @@
-package jpa.practice.product;
+package jpa.practice.basket;
 
-import jpa.practice.member.MemberBasket;
-import jpa.practice.member.MemberBasket;
+import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

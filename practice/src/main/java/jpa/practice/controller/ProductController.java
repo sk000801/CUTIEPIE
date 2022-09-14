@@ -1,15 +1,15 @@
 package jpa.practice.controller;
 
+import jpa.practice.image.ImageRepository;
+import jpa.practice.image.ImageStore;
+import jpa.practice.image.ProductImage;
 import jpa.practice.product.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import java.lang.String;
 import java.io.File;
 import java.io.IOException;
