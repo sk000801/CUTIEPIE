@@ -21,7 +21,7 @@ public class MemberBasket {
     @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToMany(mappedBy="memberBasket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
     List<BasketProduct> products = new ArrayList<>();
 
 

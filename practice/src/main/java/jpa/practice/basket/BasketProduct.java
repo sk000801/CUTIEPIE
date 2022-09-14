@@ -16,11 +16,11 @@ public class BasketProduct {
     private Long id;
 
     //fetch = FetchType.LAZY,  fetch = FetchType.LAZY,
-    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;
 
-    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="product_id")
     private Product product;
 
