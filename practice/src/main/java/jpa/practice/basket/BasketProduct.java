@@ -1,5 +1,6 @@
 package jpa.practice.basket;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ public class BasketProduct {
     @GeneratedValue
     private Long id;
 
-    //fetch = FetchType.LAZY,  fetch = FetchType.LAZY,
     @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;

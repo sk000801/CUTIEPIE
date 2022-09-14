@@ -53,12 +53,11 @@ public class LoginController {
         return a;
     }
 
-    //@RequestMapping(value="/members/login", method = {RequestMethod.POST})
     @PostMapping("/members/login")
-    public String login2(@Valid @ModelAttribute LoginForm form, BindingResult b
+    public void login2(@Valid @ModelAttribute LoginForm form, BindingResult b
                 , HttpServletResponse response) {
 
-        if(b.hasErrors()) return "members/loginMember";
+        if(b.hasErrors())  b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
 
         Member logMember = loginRepository.login(form.getMemberId(), form.getPw());
 
@@ -69,21 +68,17 @@ public class LoginController {
 
         if(logMember == null) {
             b.reject("loginFail", "아이디 혹은 비밀번호가 틀림!");
-            return "members/loginMember";
         }
 
-        System.out.println("멤버이름 = " + logMember.getName());
 
-        return "redirect:/members/login";
     }
 
     @PostMapping("/members/logout")
-    public String logout(HttpServletResponse response, HttpServletRequest request) {
+    public void logout(HttpServletResponse response, HttpServletRequest request) {
         sessionManager.expire(request);
 //        HttpSession session = request.getSession(false);
 //        if(session != null) {
 //            session.invalidate();
 //        }
-        return "mainPage1";
     }
 }

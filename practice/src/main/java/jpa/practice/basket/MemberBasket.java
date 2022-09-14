@@ -1,5 +1,6 @@
 package jpa.practice.basket;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.member.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,6 @@ public class MemberBasket {
 
     @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
     List<BasketProduct> products = new ArrayList<>();
-
 
     public void addProducts(BasketProduct basketProduct) {
         products.add(basketProduct);

@@ -1,5 +1,6 @@
 package jpa.practice.member;
 
+import jpa.practice.basket.MemberBasket;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.Getter;
@@ -30,9 +31,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="bascket_id")
-    private List<Product> bascket = new ArrayList<Product>();
+//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="basket_id")
+    private MemberBasket memberBasket;
 //
 //    private List<Product> likes;
 }

@@ -22,26 +22,25 @@ public class ProductController {
     private final ProductService productService;
     private final ImageRepository imageRepository;
 
-    @GetMapping("/admins/pManage")
-    public String page() {
-        return "products/productMain";
-    }
-
-    @GetMapping("/admins/pManage/join")
-    public String join(Model model) {
-        model.addAttribute("form", new ProductForm());
-        return "products/joinProduct";
-    }
+//    @GetMapping("/admins/pManage")
+//    public String page() {
+//        return "products/productMain";
+//    }
+//
+//    @GetMapping("/admins/pManage/join")
+//    public String join(Model model) {
+//        model.addAttribute("form", new ProductForm());
+//        return "products/joinProduct";
+//    }
 
     @PostMapping("/admins/pManage/join")
-//    @RequestMapping(path="/admins/pManage/join", method=RequestMethod.POST)
-    public String join2(ProductForm form, @RequestParam(value="file", required = false) MultipartFile file) throws IOException {
+    public void join2(ProductForm form, @RequestParam(value="file", required = false) MultipartFile file) throws IOException {
         Product product = new Product();
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
 
-        if (file.isEmpty()) return null;
+//        if (file.isEmpty()) return null; 경고창 띄우기
 
 
         ProductImage productImage = new ProductImage();
@@ -60,7 +59,6 @@ public class ProductController {
         product.setImageStore(imageStore);
 
         productService.join(product);
-        return "redirect:/admins/pManage";
     }
 
     @GetMapping("/admins/pManage/{id}/edit")

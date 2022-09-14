@@ -29,14 +29,14 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderProductRepository orderProductRepository;
 
-    @GetMapping("/orders/join/{id}")
-    public String join(@PathVariable("id") String id, Model model) {
-        model.addAttribute("OrderForm", new OrderProductForm());
-        return "orders/joinOrder";
-    }
+//    @GetMapping("/orders/join/{id}")
+//    public String join(@PathVariable("id") String id, Model model) {
+//        model.addAttribute("OrderForm", new OrderProductForm());
+//        return "orders/joinOrder";
+//    }
 
     @PostMapping("/orders/join/{id}")
-    public String join2(@SessionAttribute(name="mySessionId", required = false) Member member,
+    public void join2(@SessionAttribute(name="mySessionId", required = false) Member member,
                             @Valid OrderProductForm form, @PathVariable("id") String id,
                           HttpServletRequest request) {;
 
@@ -46,7 +46,5 @@ public class OrderController {
         orderService.join(order);
         orderProductRepository.join(orderProduct);
         //이렇게 넣어야 order가 orderProduct에 들어간 채로 em에 저장이 됨
-
-        return "redirect:/";
     }
 }

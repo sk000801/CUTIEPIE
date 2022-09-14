@@ -21,18 +21,18 @@ public class MemberSessionController {
 
     private final MemberSessionService memberSessionService;
 
-    @GetMapping("/add")
-    public String joinMember(@ModelAttribute("member") Member member) {
-        return "members/joinMember";
-    }
+//    @GetMapping("/add")
+//    public String joinMember(@ModelAttribute("member") Member member) {
+//        return "members/joinMember";
+//    }
 
     @PostMapping("/add")
-    public String joinMember2(@Valid @ModelAttribute Member member, BindingResult b) {
-        if(b.hasErrors()) {
-            return "members/joinMember";
-        }
+    public void joinMember2(@Valid @ModelAttribute Member member, BindingResult b) {
+//        if(b.hasErrors()) {
+//            return "members/joinMember";
+//        }
+//         회원가입시 오류가 발생했을 때 어떻게 해결해야 할 지 생각해보기
         memberSessionService.save(member);
-        return "redirect:/";
     }
 
 }
