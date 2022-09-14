@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="345a1c46-564b-43dc-80d1-710e10377ea3" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/BasketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/basket/BasketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/MemberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/MemberController2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/MemberSqlController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/ProductController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/controller/ProductController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/image" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/member/MemberBasket.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/basket/MemberBasket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/member/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/member/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/BasketProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/basket/BasketProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/image/ImageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/ImageStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/image/ImageStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/product/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/main/java/jpa/practice/image/ProductImage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +63,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="PracticeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jpa.practice.PracticeApplication" />
+      <module name="practice.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="jpa.practice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="애플리케이션.PracticeApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
@@ -67,5 +99,16 @@
       <updated>1663082104754</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

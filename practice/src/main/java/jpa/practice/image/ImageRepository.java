@@ -1,15 +1,10 @@
-package jpa.practice.product;
+package jpa.practice.image;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor

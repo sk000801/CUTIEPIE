@@ -1,4 +1,4 @@
-package jpa.practice.product;
+package jpa.practice.image;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

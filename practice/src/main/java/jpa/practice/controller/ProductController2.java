@@ -18,7 +18,7 @@ public class ProductController2 {
 
     @ResponseBody
     @GetMapping(path="/products/list")
-    @RequestMapping(method = RequestMethod.GET, path = "/products/list")
+    //@RequestMapping(method = RequestMethod.GET, path = "/products/list")
     public List<Product> list() {
         List<Product> lists = productService.findAll();
 
