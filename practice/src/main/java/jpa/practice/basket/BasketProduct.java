@@ -25,10 +25,9 @@ public class BasketProduct {
 
     private int count; //선택함 상품의 개수
 
-    public static BasketProduct create(Product product, MemberBasket memberBasket, int count) {
+    public static BasketProduct create(Product product, int count) {
         BasketProduct basketProduct = new BasketProduct();
         basketProduct.setProduct(product);
-        basketProduct.setMemberBasket(memberBasket);
         basketProduct.setCount(count);
         return basketProduct;
     }
