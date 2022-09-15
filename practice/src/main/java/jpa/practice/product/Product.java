@@ -2,8 +2,10 @@ package jpa.practice.product;
 
 import jpa.practice.image.ImageStore;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +30,8 @@ public class Product {
     @JoinColumn(name="image_id")
     private ImageStore imageStore;
 
+    @CreatedDate
+    private LocalDateTime createdDate;
     public void addStock(int number) {
         stock += number;
     }
