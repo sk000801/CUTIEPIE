@@ -13,17 +13,20 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class BasketProduct {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    //fetch = FetchType.LAZY,
+    @ManyToOne(  cascade = CascadeType.PERSIST)
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;
 
-    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    //fetch = FetchType.LAZY,
+    @ManyToOne(  cascade = CascadeType.PERSIST)
     @JoinColumn(name="product_id")
     private Product product;
 

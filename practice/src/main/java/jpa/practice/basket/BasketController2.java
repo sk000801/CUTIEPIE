@@ -14,8 +14,7 @@ public class BasketController2 {
 
     @ResponseBody
     @GetMapping("/members/basket")
-    public List<BasketProduct> list(@RequestParam("id") String id) {
-        MemberBasket memberBasket = basketRepository.findById(id);
-        return memberBasket.getProducts();
+    public BasketDTO list(@RequestParam("id") String id) {
+        return new BasketDTO(basketRepository.findById(id));
     }
 }

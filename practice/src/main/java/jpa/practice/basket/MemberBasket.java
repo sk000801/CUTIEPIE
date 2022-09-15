@@ -22,7 +22,8 @@ public class MemberBasket {
     @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+    // fetch=FetchType.LAZY
+    @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("memberBasket")
     List<BasketProduct> products = new ArrayList<>();
 
