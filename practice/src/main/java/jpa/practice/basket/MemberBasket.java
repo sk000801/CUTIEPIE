@@ -20,11 +20,12 @@ public class MemberBasket {
 
     @OneToOne
     @JoinColumn(name="member_id")
+    @JsonIgnore
     private Member member;
 
     // fetch=FetchType.LAZY
     @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties("memberBasket")
+    @JsonIgnore
     List<BasketProduct> products = new ArrayList<>();
 
     public void addProducts(BasketProduct basketProduct) {

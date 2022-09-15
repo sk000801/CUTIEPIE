@@ -28,6 +28,7 @@ public class BasketProduct {
     //fetch = FetchType.LAZY,
     @ManyToOne(  cascade = CascadeType.PERSIST)
     @JoinColumn(name="product_id")
+    @JsonIgnore
     private Product product;
 
     private int count; //선택함 상품의 개수
