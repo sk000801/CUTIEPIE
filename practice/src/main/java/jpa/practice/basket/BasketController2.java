@@ -2,10 +2,8 @@ package jpa.practice.basket;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,7 +14,8 @@ public class BasketController2 {
 
     @ResponseBody
     @GetMapping("/members/basket")
-    public List<MemberBasket> list() {
-        return basketRepository.findAll();
+    public List<BasketProduct> list(@RequestParam("id") String id) {
+        MemberBasket memberBasket = basketRepository.findById(id);
+        return memberBasket.getProducts();
     }
 }

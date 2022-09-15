@@ -1,6 +1,9 @@
 package jpa.practice.basket;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
