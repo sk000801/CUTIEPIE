@@ -24,6 +24,7 @@ public class BasketProduct {
     //fetch = FetchType.LAZY,
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="basket_id")
+    @JsonIgnore
     private MemberBasket memberBasket;
 
     //fetch = FetchType.LAZY,
@@ -32,11 +33,13 @@ public class BasketProduct {
     @JsonIgnore
     private Product product;
 
+    private String name;
     private int count; //선택함 상품의 개수
 
-    public static BasketProduct create(Product product, int count) {
+    public static BasketProduct create(Product product, int count, String name) {
         BasketProduct basketProduct = new BasketProduct();
         basketProduct.setProduct(product);
+        basketProduct.setName(name);
         basketProduct.setCount(count);
         return basketProduct;
     }

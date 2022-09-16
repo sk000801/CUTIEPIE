@@ -10,10 +10,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BasketDTO {
         private final List<BasketProduct> lists;
-        private final String name;
+        private String basket_id;
 
-        public BasketDTO(MemberBasket memberBasket, BasketProduct basketProduct) {
+        public BasketDTO(MemberBasket memberBasket) {
+                this.basket_id = memberBasket.getBasket_id();
                 this.lists = memberBasket.getProducts();
-                this.name = basketProduct.getProduct().getName();
         }
 }

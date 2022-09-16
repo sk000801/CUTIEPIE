@@ -5,6 +5,7 @@ import jpa.practice.member.MemberSessionService;
 import jpa.practice.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -20,7 +21,7 @@ public class BasketController {
     public void add(@PathVariable("id") String id,  @RequestParam("count") int count,
                     @SessionAttribute(name="mySessionId", required = false) Member member) {
 
-        BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
+        BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count, productRepository.findId(id).getName());
         MemberBasket memberBasket = MemberBasket.create(basketProduct);
 
         basketRepository.joinProduct(basketProduct);
