@@ -1,4 +1,4 @@
-package jpa.practice.controller;
+package jpa.practice.form;
 
 import jpa.practice.member.MemberStatus;
 import lombok.Data;
