@@ -21,7 +21,7 @@ public class BasketController {
     public void add(@PathVariable("id") String id,  @RequestParam("count") int count,
                     @SessionAttribute(name="mySessionId", required = false) Member member) {
 
-        BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count, productRepository.findId(id).getName());
+        BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
         MemberBasket memberBasket = MemberBasket.create(basketProduct);
 
         basketRepository.joinProduct(basketProduct);
