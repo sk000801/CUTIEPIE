@@ -55,7 +55,7 @@ public class LoginController {
 
     @PostMapping("/members/login")
     public void login2(@Valid @ModelAttribute LoginForm form, BindingResult b
-                , HttpServletResponse response) {
+                , HttpServletResponse response, HttpSession session) {
 
         if(b.hasErrors())  b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
 
@@ -63,6 +63,7 @@ public class LoginController {
 
         sessionManager.createSession(logMember, response);
 
+        session.setAttribute("mySessionId", logMember);
         // 여기서부터 야무지게 안들어간다.. 왜 member가 안들어갈까
         // 매핑관계 문제인지 값이 전달이 제대로 안되는지 봐야할 거 같다
 

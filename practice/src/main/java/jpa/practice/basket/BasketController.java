@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class BasketController {
 
     private final ProductRepository productRepository;
-
     private final BasketRepository basketRepository;
     private final MemberSessionService memberSessionService;
 
@@ -24,10 +23,10 @@ public class BasketController {
         BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
         MemberBasket memberBasket = MemberBasket.create(basketProduct);
 
-        member.setMemberBasket(memberBasket);
-        memberSessionService.save(member);
-
         basketRepository.joinProduct(basketProduct);
         basketRepository.joinAll(memberBasket);
+
+        member.setMemberBasket(memberBasket);
+        memberSessionService.save(member);
     }
 }
