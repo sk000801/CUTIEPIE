@@ -32,6 +32,12 @@ public class Product {
     @JoinColumn(name="image_id")
     private ImageStore imageStore;
 
+    @Column(length=10000)
+    private String detail;
+
+    @Column(name="category")
+    private ProductCategory category;
+
     @CreatedDate
     private LocalDateTime createdDate;
 

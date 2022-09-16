@@ -1,5 +1,6 @@
 package jpa.practice.form;
 
+import jpa.practice.product.ProductCategory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,10 @@ public class ProductForm {
     private int price;
 
     private int stock;
+
+    private String detail;
+
+    private ProductCategory category;
 
     private MultipartFile file;
 

@@ -40,6 +40,8 @@ public class ProductController {
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
+        product.setCategory(form.getCategory());
+        product.setDetail(form.getDetail());
 
 //        if (file.isEmpty()) return null; 경고창 띄우기
 
@@ -71,6 +73,7 @@ public class ProductController {
         form.setPName(product.getName());
         form.setPrice(product.getPrice());
         form.setStock(product.getStock());
+        form.setDetail(product.getDetail());
 
         model.addAttribute("form", form);
 
@@ -83,6 +86,7 @@ public class ProductController {
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
+        product.setDetail(form.getDetail());
 
         productService.join(product);
         return "redirect:/admins/pManage";
