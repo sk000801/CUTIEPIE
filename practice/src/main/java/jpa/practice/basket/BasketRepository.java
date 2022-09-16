@@ -24,8 +24,17 @@ public class BasketRepository {
         em.persist(basketProduct);
     }
 
+    public String returnName() {
+        return (String) em.createQuery("select name from Product p where p.name = :product_name")
+                .getSingleResult();
+    }
+
     public MemberBasket findById(String id) {
         return em.find(MemberBasket.class, id);
+    }
+
+    public BasketProduct findById2(String id) {
+        return em.find(BasketProduct.class, id);
     }
 
 //    public List findAll(MemberBasket memberBasket) {

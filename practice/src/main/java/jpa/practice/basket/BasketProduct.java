@@ -18,15 +18,16 @@ public class BasketProduct {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
     //fetch = FetchType.LAZY,
-    @ManyToOne(  cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;
 
     //fetch = FetchType.LAZY,
-    @ManyToOne(  cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="product_id")
     @JsonIgnore
     private Product product;

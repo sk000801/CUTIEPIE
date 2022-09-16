@@ -31,27 +31,27 @@ public class LoginController {
 
     private Map<String, Object> store = new ConcurrentHashMap<>();
 
-    @GetMapping("/members/login")
-    //@CookieValue(name="memberId", required = false) String id
-    public String login(HttpSession session, HttpServletRequest request, Model model) {
-        Member logMember = (Member) sessionManager.getSession(request);
-        if (logMember == null) return "members/loginMember";
-        model.addAttribute("member", logMember);
-        session.setAttribute("mySessionId", logMember);
-
-        String a = null;
-
-        if(logMember.getStatus() == MemberStatus.member) {
-            a = "mainPage2";
-        }
-
-        if(logMember.getStatus() == MemberStatus.admin) {
-            a = "mainPage3";
-        }
-
-
-        return a;
-    }
+//    @GetMapping("/members/login")
+//    //@CookieValue(name="memberId", required = false) String id
+//    public String login(HttpSession session, HttpServletRequest request, Model model) {
+//        Member logMember = (Member) sessionManager.getSession(request);
+//        if (logMember == null) return "members/loginMember";
+//        model.addAttribute("member", logMember);
+//        session.setAttribute("mySessionId", logMember);
+//
+//        String a = null;
+//
+//        if(logMember.getStatus() == MemberStatus.member) {
+//            a = "mainPage2";
+//        }
+//
+//        if(logMember.getStatus() == MemberStatus.admin) {
+//            a = "mainPage3";
+//        }
+//
+//
+//        return a;
+//    }
 
     @PostMapping("/members/login")
     public void login2(@Valid @ModelAttribute LoginForm form, BindingResult b
