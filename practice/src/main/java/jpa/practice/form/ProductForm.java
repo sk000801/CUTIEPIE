@@ -1,4 +1,4 @@
-package jpa.practice.controller;
+package jpa.practice.form;
 
 import lombok.Getter;
 import lombok.Setter;
