@@ -16,12 +16,13 @@ import java.util.UUID;
 public class MemberBasket {
 
     @Id
+    @Column(name="basket_id")
     private String basket_id = UUID.randomUUID().toString();
 
-    @OneToOne
-    @JoinColumn(name="member_id")
-    @JsonIgnore
-    private Member member;
+//    @OneToOne
+//    @JoinColumn(name="member_id")
+//    @JsonIgnore
+//    private Member member;
 
     // fetch=FetchType.LAZY
     @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
@@ -33,9 +34,9 @@ public class MemberBasket {
         basketProduct.setMemberBasket(this);
     }
 
-    public static MemberBasket create(Member member, BasketProduct... products) {
+    public static MemberBasket create(BasketProduct... products) {
         MemberBasket memberBasket = new MemberBasket();
-        memberBasket.setMember(member);
+        //memberBasket.setMember(member);
         for(BasketProduct basketProduct : products) {
             memberBasket.addProducts(basketProduct);
         }
