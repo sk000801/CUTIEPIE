@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +22,7 @@ import java.sql.*;
 @Table(name="orders")
 @Data
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 // 여러가지 상품들이 종합된 하나의 주문서
 public class Order {
     @Id
@@ -31,6 +35,9 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> lists = new ArrayList<>();
+
+    @CreatedDate
+    private LocalDateTime createdDate;
 
 //    private String pName;
 //    private int pNumber;

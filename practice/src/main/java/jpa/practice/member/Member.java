@@ -30,6 +30,7 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
+    //isAdmin
 
 //    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @OneToOne
