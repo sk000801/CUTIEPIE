@@ -23,4 +23,8 @@ public class LoginRepository {
          else return null;
         //id와 pw가 같은 멤버를 return 해주던가 없으면 그냥 null을 반환해주던가
     }
+
+    public Object failId(String id) {
+        return memberSessionService.findById(id);
+    }
 }

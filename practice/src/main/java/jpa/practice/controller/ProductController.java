@@ -81,7 +81,7 @@ public class ProductController {
     }
 
     @PostMapping("/admins/pManage/{id}/edit")
-    public String edit2(ProductForm form) {
+    public void edit2(ProductForm form) {
         Product product = new Product();
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
@@ -89,7 +89,7 @@ public class ProductController {
         product.setDetail(form.getDetail());
 
         productService.join(product);
-        return "redirect:/admins/pManage";
+        //return "redirect:/admins/pManage";
     }
 
     @GetMapping("/admins/pManage/search")

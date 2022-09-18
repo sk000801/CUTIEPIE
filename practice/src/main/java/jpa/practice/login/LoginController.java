@@ -63,15 +63,15 @@ public class LoginController {
             b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
         }
 
-        if(!StringUtils.hasText(form.getMemberId())) {
-            b.addError(new FieldError("form", "memberId", "회원님 아이디는 입력해 주세요ㅠㅠ"));
-        }
-
-        if(!StringUtils.hasText(form.getPw())) {
-            b.addError(new FieldError("form", "pw", "회원님 비밀번호는 입력해 주세요ㅠㅠ"));
+        if(loginRepository.failId(form.getMemberId()) == null) {
+            b.addError(new FieldError("form", "memberId", "회원님 아이디가 틀렸습니다!"));
         }
 
         Member logMember = loginRepository.login(form.getMemberId(), form.getPw());
+
+        if(logMember == null) {
+            b.addError(new FieldError("form", "pw", "회원님 비밀번호가 틀렸습니다!"));
+        }
 
         sessionManager.createSession(logMember, response);
 
