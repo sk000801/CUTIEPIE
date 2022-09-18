@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -57,20 +59,23 @@ public class LoginController {
     public void login2(@Valid @ModelAttribute LoginForm form, BindingResult b
                 , HttpServletResponse response, HttpSession session) {
 
-        if(b.hasErrors())  b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
+        if(b.hasErrors())  {
+            b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
+        }
+
+        if(!StringUtils.hasText(form.getMemberId())) {
+            b.addError(new FieldError("form", "memberId", "회원님 아이디는 입력해 주세요ㅠㅠ"));
+        }
+
+        if(!StringUtils.hasText(form.getPw())) {
+            b.addError(new FieldError("form", "pw", "회원님 비밀번호는 입력해 주세요ㅠㅠ"));
+        }
 
         Member logMember = loginRepository.login(form.getMemberId(), form.getPw());
 
         sessionManager.createSession(logMember, response);
 
         session.setAttribute("mySessionId", logMember);
-        // 여기서부터 야무지게 안들어간다.. 왜 member가 안들어갈까
-        // 매핑관계 문제인지 값이 전달이 제대로 안되는지 봐야할 거 같다
-
-        if(logMember == null) {
-            b.reject("loginFail", "아이디 혹은 비밀번호가 틀림!");
-        }
-
 
     }
 

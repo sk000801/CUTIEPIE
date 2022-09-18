@@ -21,10 +21,6 @@ public class MemberSessionController {
 
     private final MemberSessionService memberSessionService;
 
-//    @GetMapping("/add")
-//    public String joinMember(@ModelAttribute("member") Member member) {
-//        return "members/joinMember";
-//    }
 
     @PostMapping("/add")
     public void joinMember2(@Valid @ModelAttribute Member member, BindingResult b) {
