@@ -9,6 +9,8 @@ import jpa.practice.order.OrderService;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +32,13 @@ public class OrderController {
 
     @PostMapping("/orders/join/{id}")
     public void join2(@SessionAttribute(name="mySessionId", required = false) Member member,
-                      @Valid OrderProductForm form, @PathVariable("id") String id,
+                      @Valid OrderProductForm form, BindingResult b, @PathVariable("id") String id,
                       HttpServletRequest request) {;
 
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
-
+        if(productService.findId(id).getStock() < form.getCount()) {
+            b.addError(new FieldError("count", "form", "주문하신 상품 수가 재고보다 많아요ㅠㅠ"));
+        }
         Order order = Order.create(member, orderProduct);
         orderService.join(order);
         orderProductRepository.join(orderProduct);

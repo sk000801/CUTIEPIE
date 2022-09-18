@@ -64,7 +64,7 @@ public class LoginController {
         }
 
         if(loginRepository.failId(form.getMemberId()) == null) {
-            b.addError(new FieldError("form", "memberId", "회원님 아이디가 틀렸습니다!"));
+            b.addError(new FieldError("memberId", "form", "회원님 아이디가 틀렸습니다!"));
         }
 
         Member logMember = loginRepository.login(form.getMemberId(), form.getPw());

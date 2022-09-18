@@ -6,6 +6,8 @@ import jpa.practice.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -18,10 +20,14 @@ public class BasketController {
 
     //담는 개수를 주소에다 보냄
     @PostMapping("/members/basket/{id}")
-    public void add(@PathVariable("id") String id,  @RequestParam("count") int count,
+    public void add(@PathVariable("id") String id,  @RequestParam("count") int count, BindingResult b,
                     @SessionAttribute(name="mySessionId", required = false) Member member) {
 
         BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
+        if(productRepository.findId(id).getStock() < count) {
+            b.addError(new FieldError("count","count", "장바구니에 담긴 상품 개수가 재고보다 많습니다!"));
+            //어우 근데 얘는 count 단독으로 url에서 받아오는 친구라 field가 있는지 모르겠다
+        }
         MemberBasket memberBasket = MemberBasket.create(basketProduct);
 
         basketRepository.joinProduct(basketProduct);

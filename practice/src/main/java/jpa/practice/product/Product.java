@@ -36,6 +36,7 @@ public class Product {
     private String detail;
 
     @Column(name="category")
+    @Enumerated(EnumType.STRING)
     private ProductCategory category;
 
     @CreatedDate
