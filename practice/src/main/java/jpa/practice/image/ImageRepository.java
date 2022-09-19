@@ -16,4 +16,8 @@ public class ImageRepository {
         em.persist(imageStore);
     }
 
+    public ImageStore findById(String id) {
+        return em.find(ImageStore.class, id);
+    }
+
 }

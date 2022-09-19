@@ -27,8 +27,6 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-@WebServlet("/admins/pManage/join")
-@Data
 public class ProductController extends HttpServlet {
     private final ProductService productService;
     private final ImageRepository imageRepository;
