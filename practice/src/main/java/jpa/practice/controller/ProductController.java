@@ -5,12 +5,20 @@ import jpa.practice.image.ImageRepository;
 import jpa.practice.image.ImageStore;
 import jpa.practice.image.ProductImage;
 import jpa.practice.product.*;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.String;
 import java.io.File;
 import java.io.IOException;
@@ -19,23 +27,16 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-public class ProductController {
+@WebServlet("/admins/pManage/join")
+@Data
+public class ProductController extends HttpServlet {
     private final ProductService productService;
     private final ImageRepository imageRepository;
 
-//    @GetMapping("/admins/pManage")
-//    public String page() {
-//        return "products/productMain";
-//    }
-//
-//    @GetMapping("/admins/pManage/join")
-//    public String join(Model model) {
-//        model.addAttribute("form", new ProductForm());
-//        return "products/joinProduct";
-//    }
-
     @PostMapping("/admins/pManage/join")
-    public void join2(ProductForm form, @RequestParam(value="file", required = false) MultipartFile file) throws IOException {
+    public void join2(ProductForm form,
+                      @RequestParam(value="file", required = false) MultipartFile file)
+            throws IOException {
         Product product = new Product();
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
@@ -54,10 +55,9 @@ public class ProductController {
         imageStore.setStoreFilename(storeFilename);
         imageStore.setUploadFilename(originalFilename);
 
-                //파일 저장
-        file.transferTo(new File(productImage.getFullPath(storeFilename)));
 
-        //imageRepository.join(imageStore);
+        //파일 저장
+        file.transferTo(new File(productImage.getFullPath(storeFilename)));
 
         product.setImageStore(imageStore);
 
