@@ -19,9 +19,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
 import java.lang.String;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,10 +32,11 @@ import java.util.UUID;
 public class ProductController extends HttpServlet {
     private final ProductService productService;
     private final ImageRepository imageRepository;
+    private FileOutputStream fileOutputStream;
 
     @PostMapping("/admins/pManage/join")
     public void join2(ProductForm form,
-                      @RequestParam(value="file", required = false) MultipartFile file)
+                 @RequestParam(value="file", required = false) MultipartFile file)
             throws IOException {
         Product product = new Product();
         product.setName(form.getPName());
@@ -47,6 +50,7 @@ public class ProductController extends HttpServlet {
 
         String originalFilename = file.getOriginalFilename();
         String storeFilename = UUID.randomUUID() +"."+productImage.extractExt(originalFilename);
+
         imageStore.setStoreFilename(storeFilename);
         imageStore.setUploadFilename(originalFilename);
         imageStore.setData(file.getBytes());

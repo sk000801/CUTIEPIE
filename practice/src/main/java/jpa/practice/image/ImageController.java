@@ -30,13 +30,12 @@ public class ImageController {
 
     @GetMapping("/{id}") //이 id는 사진 고유
     public ResponseEntity<byte[]> getFile(@PathVariable("id") String id, HttpServletRequest request,
-                        HttpServletResponse response) {
+                                          HttpServletResponse response) {
         ImageStore imageStore = imageRepository.findById(id);
-
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", imageStore.getType());
         headers.add("Content-Length", String.valueOf(imageStore.getData().length));
 
-        return new ResponseEntity<byte[]>(imageStore.getData(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(imageStore.getData(), headers, HttpStatus.OK);
     }
 }
