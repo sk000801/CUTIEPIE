@@ -42,9 +42,6 @@ public class ProductController extends HttpServlet {
         product.setCategory(form.getCategory());
         product.setDetail(form.getDetail());
 
-//        if (file.isEmpty()) return null; 경고창 띄우기
-
-
         ProductImage productImage = new ProductImage();
         ImageStore imageStore = new ImageStore();
 
@@ -52,7 +49,8 @@ public class ProductController extends HttpServlet {
         String storeFilename = UUID.randomUUID() +"."+productImage.extractExt(originalFilename);
         imageStore.setStoreFilename(storeFilename);
         imageStore.setUploadFilename(originalFilename);
-
+        imageStore.setData(file.getBytes());
+        imageStore.setType(file.getContentType());
 
         //파일 저장
         file.transferTo(new File(productImage.getFullPath(storeFilename)));

@@ -26,4 +26,13 @@ public class ImageStore {
     @Column(name="filename")
     private String storeFilename;
 
+    @Column(name="imageUrl")
+    private String url;
+
+    @Transient
+    private byte[] data;
+
+    @Transient
+    private String type;
+
 }
