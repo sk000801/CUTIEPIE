@@ -44,11 +44,11 @@ public class ProductController extends HttpServlet {
     private final ImageRepository imageRepository;
 
     @GetMapping("/products/image/{id}")
-    public ResponseEntity<?> download(@PathVariable("id") String idExt, HttpServletRequest request)
+    public ResponseEntity<?> download(@PathVariable("id") String id, HttpServletRequest request)
         throws FileNotFoundException {
-        //차라리 ~~~.jpg를 받아와서 .jpg자체를 다 지워버리는 게 낫지 않을까
-        int idx = idExt.lastIndexOf(".");
-        String id = idExt.substring(0, idx);
+
+//        int idx = idExt.lastIndexOf(".");
+//        String id = idExt.substring(0, idx);
         ImageStore imageStore = imageRepository.findById(id);
         Resource resource = imageService.loadFile(imageStore.getFileName());
 

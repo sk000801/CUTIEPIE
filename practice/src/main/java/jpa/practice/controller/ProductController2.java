@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,19 +38,18 @@ public class ProductController2 {
     }
 
     @PostMapping("/admins/pManage/join")
-    public ResponseEntity<?> join2(ProductForm form,
-                      @RequestParam(value="file", required = false) MultipartFile file,
-                      HttpServletResponse response)
+    public ResponseEntity<?> join2(ProductForm form, @RequestParam("file") MultipartFile file
+                                   ,HttpServletResponse response)
             throws IOException {
 
         Product product = Product.create(form.getPName(), form.getStock(), form.getPrice(),
                 form.getDetail(), form.getCategory());
 
-        String name = file.getName();
-        String ext = name.substring(name.lastIndexOf(".") + 1);
+//        String name = file.getName();
+//        String ext = name.substring(name.lastIndexOf(".") + 1);
 
         ImageStore imageStore = new ImageStore();
-        imageStore.setIdExt(imageStore.getImage_id()+ext);
+//        imageStore.setIdExt(imageStore.getImage_id()+ext);
 
         if(file.isEmpty()) {
             response.sendError(404, "클라이언트 오류");
@@ -63,8 +60,6 @@ public class ProductController2 {
                 .path(imageStore.getImage_id())
                 .toUriString();
 
-        //헐 이거 url로 보낼 떄 id로 보내면 뒤에 jpg가 안찍힘 ㅠㅠ 잠만
-
         imageStore.setFileName(imageService.saveImage(file));
         imageStore.setUrl(downloadURI);
         product.setImageStore(imageStore);
@@ -72,6 +67,5 @@ public class ProductController2 {
         productService.join(product);
 
         return new ResponseEntity<>(downloadURI, HttpStatus.OK);
-
     }
 }
