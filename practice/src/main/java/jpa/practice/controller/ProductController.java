@@ -2,16 +2,23 @@ package jpa.practice.controller;
 
 import jpa.practice.form.ProductForm;
 import jpa.practice.image.ImageRepository;
+import jpa.practice.image.ImageService;
 import jpa.practice.image.ImageStore;
-import jpa.practice.image.ProductImage;
 import jpa.practice.product.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.lang.String;
 import java.io.File;
@@ -28,39 +36,35 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class ProductController extends HttpServlet {
     private final ProductService productService;
+    private final ImageService imageService;
     private final ImageRepository imageRepository;
 
-    @PostMapping("/admins/pManage/join")
-    public void join2(ProductForm form,
-                 @RequestParam(value="file", required = false) MultipartFile file)
-            throws IOException {
-        Product product = new Product();
-        product.setName(form.getPName());
-        product.setPrice(form.getPrice());
-        product.setStock(form.getStock());
-        product.setCategory(form.getCategory());
-        product.setDetail(form.getDetail());
+    @GetMapping("/products/image/{id}")
+    public ResponseEntity<?> download(@PathVariable("id") String idExt, HttpServletRequest request)
+        throws FileNotFoundException {
+        //차라리 ~~~.jpg를 받아와서 .jpg자체를 다 지워버리는 게 낫지 않을까
+        ImageStore imageStore = imageRepository.findById(id);
+        Resource resource = imageService.loadFile(imageStore.getFileName());
 
-        ProductImage productImage = new ProductImage();
-        ImageStore imageStore = new ImageStore();
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch(IOException ex) {
+            log.info("파일 타입을 결정할 수 없습니다!");
+        }
 
-        String originalFilename = file.getOriginalFilename();
-        String storeFilename = UUID.randomUUID() +"."+productImage.extractExt(originalFilename);
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
 
-        imageStore.setStoreFilename(storeFilename);
-        imageStore.setUploadFilename(originalFilename);
-        imageStore.setData(file.getBytes());
-        imageStore.setType(file.getContentType());
-
-        //파일 저장
-        file.transferTo(new File(productImage.getFullPath(storeFilename)));
-
-        product.setImageStore(imageStore);
-
-        productService.join(product);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\\\"\" + resource.getFilename() + \"\\\"")
+                .body(resource);
     }
 
     @GetMapping("/admins/pManage/{id}/edit")

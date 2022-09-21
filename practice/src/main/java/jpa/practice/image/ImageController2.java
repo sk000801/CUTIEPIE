@@ -28,8 +28,7 @@ public class ImageController2 {
 
     ///admins/pManage/join/{id}
     @PostMapping("/upload") //id는 사진 id
-    public ResponseEntity<?> upload(//@RequestParam("file")
-                                     MultipartFile file,
+    public ResponseEntity<?> upload(MultipartFile file,
                                     HttpServletResponse response) throws IOException {
         if(file.isEmpty()) {
             response.sendError(404, "클라이언트 오류");

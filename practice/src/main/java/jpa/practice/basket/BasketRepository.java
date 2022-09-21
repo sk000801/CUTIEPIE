@@ -32,9 +32,4 @@ public class BasketRepository {
         return em.find(BasketProduct.class, id);
     }
 
-//    public List findAll(MemberBasket memberBasket) {
-//        return em.createQuery("select mb.products from MemberBasket mb", BasketProduct.class)
-//                .setParameter("products", memberBasket.getProducts())
-//                .getResultList();
-//    }
 }

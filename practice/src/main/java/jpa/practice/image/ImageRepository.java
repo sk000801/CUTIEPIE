@@ -19,5 +19,4 @@ public class ImageRepository {
     public ImageStore findById(String id) {
         return em.find(ImageStore.class, id);
     }
-
 }

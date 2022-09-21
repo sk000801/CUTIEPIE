@@ -20,19 +20,13 @@ public class ImageStore {
     @Column(name="image_id")
     private String image_id = UUID.randomUUID().toString();
 
-    @Column(name="original_name")
-    private String uploadFilename;
-
-    @Column(name="filename")
-    private String storeFilename;
+    @Transient
+    private String idExt;
 
     @Column(name="imageUrl")
     private String url;
 
     @Transient
-    private byte[] data;
-
-    @Transient
-    private String type;
+    private String fileName;
 
 }

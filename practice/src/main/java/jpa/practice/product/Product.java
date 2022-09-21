@@ -42,6 +42,17 @@ public class Product {
     @CreatedDate
     private LocalDateTime createdDate;
 
+    public static Product create(String name, int stock, int price, String detail, ProductCategory category) {
+        Product product = new Product();
+        product.name = name;
+        product.stock = stock;
+        product.price = price;
+        product.detail = detail;
+        product.category = category;
+
+        return product;
+    }
+
     public void addStock(int number) {
         stock += number;
     }
