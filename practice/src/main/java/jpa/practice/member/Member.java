@@ -19,12 +19,6 @@ public class Member {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(name="member_id")
-    private String memberId;
-
-    @Column(name="pw")
-    private String pw;
-
     @Column(name="name")
     private String name;
 
@@ -32,7 +26,6 @@ public class Member {
     private MemberStatus status;
     //isAdmin
 
-//    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @OneToOne
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;

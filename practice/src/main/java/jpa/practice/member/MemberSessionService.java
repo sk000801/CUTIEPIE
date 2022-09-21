@@ -18,6 +18,10 @@ public class MemberSessionService {
         memberRepository.save(member);
     }
 
+    public void save_account(MemberAccount memberAccount) {
+        memberRepository.save_account(memberAccount);
+    }
+
     public Member findById(String id) {
         return memberRepository.findById(id);
     }
