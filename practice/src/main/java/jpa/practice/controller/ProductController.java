@@ -32,7 +32,6 @@ import java.util.UUID;
 public class ProductController extends HttpServlet {
     private final ProductService productService;
     private final ImageRepository imageRepository;
-    private FileOutputStream fileOutputStream;
 
     @PostMapping("/admins/pManage/join")
     public void join2(ProductForm form,
