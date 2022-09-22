@@ -22,8 +22,8 @@ public class Member {
     @Column(name="name")
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus status;
+//    @Enumerated(EnumType.STRING)
+//    private MemberStatus status;
     //isAdmin
 
     @OneToOne

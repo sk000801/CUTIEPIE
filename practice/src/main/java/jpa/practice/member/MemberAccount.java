@@ -16,17 +16,10 @@ public class MemberAccount {
 
     private String id;
 
-    @Transient
     private String pw;
-
-    private String encPw;
-
-    @Transient
-    private Map<String, String> pwList = new HashMap<>();
 
     public String push(String pw) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        pwList.put(encoder.encode(pw), pw);
         return encoder.encode(pw);
     }
 }
