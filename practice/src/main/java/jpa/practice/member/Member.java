@@ -29,6 +29,8 @@ public class Member {
     @OneToOne
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;
-//
-//    private List<Product> likes;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    private MemberAccount memberAccount;
 }
