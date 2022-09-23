@@ -53,9 +53,13 @@ public class ProductController2 {
 
         ImageStore imageStore = new ImageStore();
 
+        String fileName = file.getName();
+        String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+        String id_ext = imageStore.getImage_id()+ ext;
         try {
             BlobInfo blobinfo  = storage.create(
-                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id())
+                    BlobInfo.newBuilder("cutiepie_image", id_ext)
                             .build(), file.getBytes(),
                     Storage.BlobTargetOption.predefinedAcl(Storage.PredefinedAcl.PUBLIC_READ)
             );
