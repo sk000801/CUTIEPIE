@@ -1,7 +1,6 @@
 package jpa.practice.controller;
 
 import jpa.practice.form.ProductForm;
-import jpa.practice.image.ImageService;
 import jpa.practice.image.ImageStore;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;

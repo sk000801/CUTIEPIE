@@ -1,6 +1,5 @@
 package jpa.practice.order;
 
-import jpa.practice.SessionManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +22,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll() {
+    public List findAll() {
         return em.createQuery("select o from Order as o")
                 .getResultList();
     }
