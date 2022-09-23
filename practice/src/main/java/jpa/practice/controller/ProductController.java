@@ -26,34 +26,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController extends HttpServlet {
     private final ProductService productService;
-    private final ImageService imageService;
-    private final ImageRepository imageRepository;
-
-    @GetMapping("/products/image/{id}")
-    public ResponseEntity<?> download(@PathVariable("id") String id, HttpServletRequest request)
-        throws FileNotFoundException {
-
-//        int idx = idExt.lastIndexOf(".");
-//        String id = idExt.substring(0, idx);
-        ImageStore imageStore = imageRepository.findById(id);
-        Resource resource = imageService.loadFile(imageStore.getFileName());
-
-        String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch(IOException ex) {
-            log.info("파일 타입을 결정할 수 없습니다!");
-        }
-
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\\\"\" + resource.getFilename() + \"\\\"")
-                .body(resource);
-    }
 
     @GetMapping("/admins/pManage/{id}/edit")
     public String edit(@PathVariable("id") String id, Model model) {

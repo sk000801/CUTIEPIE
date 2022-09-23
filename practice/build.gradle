@@ -39,9 +39,9 @@ dependencies {
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 //	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	implementation("com.google.cloud:spring-cloud-gcp-starter-pubsub")
-	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql'
-	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-data-datastore'
+	//implementation("com.google.cloud:spring-cloud-gcp-starter-pubsub")
+	//implementation 'org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql'
+	//implementation 'org.springframework.cloud:spring-cloud-gcp-starter-data-datastore'
 	implementation("org.springframework.integration:spring-integration-file")
 	implementation platform('com.google.cloud:libraries-bom:25.4.0')
 	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-storage:1.2.8.RELEASE'

@@ -1,19 +1,21 @@
 package jpa.practice.controller;
 
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import jpa.practice.form.ProductForm;
+import jpa.practice.image.ImageRepository;
 import jpa.practice.image.ImageStore;
 import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +26,8 @@ import java.util.List;
 public class ProductController2 {
 
     private final ProductService productService;
-    private final ImageService imageService;
+    private final ImageRepository imageRepository;
+    private static Storage storage = StorageOptions.getDefaultInstance().getService();
 
     //여기서 오류날 수 있는건 fetch를 시도할 때 LAZY로 설정을 하면 바로바로 들어가지 않아서
     //이렇게 json 형태로 page에 반환을 요청하면 요류가 나는듯해용...
@@ -37,34 +40,40 @@ public class ProductController2 {
     }
 
     @PostMapping("/admins/pManage/join")
-    public ResponseEntity<?> join2(ProductForm form, @RequestParam("file") MultipartFile file
-                                   ,HttpServletResponse response)
+    public String join2(ProductForm form, @RequestParam("file") MultipartFile file
+                                   , HttpServletResponse response)
             throws IOException {
-
-        Product product = Product.create(form.getPName(), form.getStock(), form.getPrice(),
-                form.getDetail(), form.getCategory());
-
-//        String name = file.getName();
-//        String ext = name.substring(name.lastIndexOf(".") + 1);
-
-        ImageStore imageStore = new ImageStore();
-//        imageStore.setIdExt(imageStore.getImage_id()+ext);
 
         if(file.isEmpty()) {
             response.sendError(404, "클라이언트 오류");
         }
 
-        String downloadURI = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/products/image/")
-                .path(imageStore.getImage_id())
-                .toUriString();
+        Product product = Product.create(form.getPName(), form.getStock(), form.getPrice(),
+                form.getDetail(), form.getCategory());
 
-        imageStore.setFileName(imageService.saveImage(file));
-        imageStore.setUrl(downloadURI);
-        product.setImageStore(imageStore);
+        ImageStore imageStore = new ImageStore();
 
-        productService.join(product);
+        try {
+            BlobInfo blobinfo  = storage.create(
+                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id())
+                            .build(), file.getBytes(),
+                    Storage.BlobTargetOption.predefinedAcl(Storage.PredefinedAcl.PUBLIC_READ)
+            );
+            imageStore.setUrl(blobinfo.getMediaLink());
 
-        return new ResponseEntity<>(downloadURI, HttpStatus.OK);
+            product.setImageStore(imageStore);
+            productService.join(product);
+
+            return imageStore.getUrl();
+        } catch(IllegalStateException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/products/image/{id}")
+    @ResponseBody
+    public String download(@PathVariable("id") String id, HttpServletRequest request) {
+        ImageStore imageStore = imageRepository.findById(id);
+        return imageStore.getUrl();
     }
 }

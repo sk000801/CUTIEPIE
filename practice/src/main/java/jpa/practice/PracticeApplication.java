@@ -12,9 +12,6 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EnableConfigurationProperties( {
-		FileUploadProperties.class
-})
 public class PracticeApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
