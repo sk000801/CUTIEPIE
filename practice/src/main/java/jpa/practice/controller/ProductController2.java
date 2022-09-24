@@ -9,13 +9,17 @@ import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +33,7 @@ public class ProductController2 {
 
     private final ProductService productService;
     private final ImageRepository imageRepository;
+    //private final  ServletContext servletContext;
     private static Storage storage = StorageOptions.getDefaultInstance().getService();
 
     //여기서 오류날 수 있는건 fetch를 시도할 때 LAZY로 설정을 하면 바로바로 들어가지 않아서
@@ -42,8 +47,9 @@ public class ProductController2 {
     }
 
     @PostMapping("/admins/pManage/join")
-    public String join2(ProductForm form, @RequestParam("file") MultipartFile file
-                                   , HttpServletResponse response)
+    @SuppressWarnings("deprecation")
+    public String join2(ProductForm form, @RequestParam("file") MultipartFile file,
+                        HttpServletResponse response, HttpServletRequest request)
             throws IOException {
 
         if(file.isEmpty()) {
@@ -55,16 +61,24 @@ public class ProductController2 {
 
         ImageStore imageStore = new ImageStore();
 
-        String ext = "." + FilenameUtils.getExtension(file.getName());
+        String path = "C:/images/";
+
+        int pos = file.getOriginalFilename().lastIndexOf(".");
+        String ext = file.getOriginalFilename().substring(pos);
+
+        String filename = path+imageStore.getImage_id()+ext;
+
+        file.transferTo(new File(filename));
 
         try {
             BlobId blobId = BlobId.of("cutiepie_image", imageStore.getImage_id());
             BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
                             .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
-                             .build();
-            Blob blob = storage.create(blobInfo, new FileInputStream());
-            );
-            imageStore.setUrl(blobInfo.getMediaLink());
+                            .setContentType("image/jpeg")
+                            .build();
+            Blob blob = storage.create(blobInfo, new FileInputStream(filename));
+
+            imageStore.setUrl(blob.getMediaLink());
 
 //            BlobInfo blobInfo = storage.create(
 //                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id()+ext)
