@@ -1,8 +1,6 @@
 package jpa.practice.controller;
 
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.storage.*;
 import jpa.practice.form.ProductForm;
 import jpa.practice.image.ImageRepository;
 import jpa.practice.image.ImageStore;
@@ -10,6 +8,7 @@ import jpa.practice.product.Product;
 import jpa.practice.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -53,17 +55,28 @@ public class ProductController2 {
 
         ImageStore imageStore = new ImageStore();
 
-        String fileName = file.getName();
-        String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String ext = "." + FilenameUtils.getExtension(file.getName());
 
-        String id_ext = imageStore.getImage_id()+ ext;
         try {
-            BlobInfo blobinfo  = storage.create(
-                    BlobInfo.newBuilder("cutiepie_image", id_ext)
-                            .build(), file.getBytes(),
-                    Storage.BlobTargetOption.predefinedAcl(Storage.PredefinedAcl.PUBLIC_READ)
+            BlobId blobId = BlobId.of("cutiepie_image", imageStore.getImage_id());
+            BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
+                            .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
+                             .build();
+            Blob blob = storage.create(blobInfo, new FileInputStream());
             );
-            imageStore.setUrl(blobinfo.getMediaLink());
+            imageStore.setUrl(blobInfo.getMediaLink());
+
+//            BlobInfo blobInfo = storage.create(
+//                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id()+ext)
+//                            .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
+//                            .setContentType("image/jpeg")
+//                            .build(),
+
+//            BlobInfo blobinfo  = storage.create(
+//                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id())
+//                            .build(), file.getBytes(),
+//                    Storage.BlobTargetOption.predefinedAcl(Storage.PredefinedAcl.PUBLIC_READ)
+//            );
 
             product.setImageStore(imageStore);
             productService.join(product);
