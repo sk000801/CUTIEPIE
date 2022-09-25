@@ -52,7 +52,6 @@ public class ProductController extends HttpServlet {
         product.setDetail(form.getDetail());
 
         productService.join(product);
-        //return "redirect:/admins/pManage";
     }
 
     @GetMapping("/admins/pManage/search")

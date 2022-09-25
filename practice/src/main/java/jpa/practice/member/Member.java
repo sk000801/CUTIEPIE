@@ -32,8 +32,7 @@ public class Member {
     @JoinColumn(name="account_id")
     private MemberAccount memberAccount;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="order_id")
+    @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Order> PostOrder = new ArrayList<>();
 
     public static Member create(String name, MemberAccount memberAccount) {

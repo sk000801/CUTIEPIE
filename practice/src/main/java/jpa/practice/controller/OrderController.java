@@ -41,7 +41,7 @@ public class OrderController {
         }
         Order order = Order.create(member, orderProduct);
         orderService.join(order);
-        orderProductRepository.join(orderProduct);
+        //orderProductRepository.join(orderProduct);
         //이렇게 넣어야 order가 orderProduct에 들어간 채로 em에 저장이 됨
     }
 }

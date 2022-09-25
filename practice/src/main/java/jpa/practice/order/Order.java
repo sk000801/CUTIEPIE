@@ -1,5 +1,6 @@
 package jpa.practice.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.member.Member;
 import jpa.practice.product.Product;
 import lombok.Data;
@@ -29,8 +30,9 @@ public class Order {
     @Column(name="order_id")
     private String order_id = UUID.randomUUID().toString();
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="id")
+    @JsonIgnore
     private Member member;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -39,9 +41,8 @@ public class Order {
     @CreatedDate
     private LocalDateTime createdDate;
 
-//    private String pName;
-//    private int pNumber;
-//    굳이 필요하다는 생각이 안드는게 왜냐면 orderproduct로 각각의 상품들 정보가 들어오는데 얘가 필요?
+
+
     public void addOrderProduct(OrderProduct orderProduct) {
         lists.add(orderProduct);
         orderProduct.setOrder(this);
