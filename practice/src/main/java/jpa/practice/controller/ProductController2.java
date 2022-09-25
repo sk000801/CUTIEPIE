@@ -77,8 +77,8 @@ public class ProductController2 {
                             .setContentType("image/jpeg")
                             .build();
             Blob blob = storage.create(blobInfo, new FileInputStream(filename));
-
-            imageStore.setUrl(blob.getMediaLink());
+            //blob.getMediaLink()
+            imageStore.setUrl("https://storage.googleapis.com/cutiepie_image/"+imageStore.getImage_id());
 
 //            BlobInfo blobInfo = storage.create(
 //                    BlobInfo.newBuilder("cutiepie_image", imageStore.getImage_id()+ext)
