@@ -1,6 +1,7 @@
 package jpa.practice.controller;
 
 import jpa.practice.SessionManager;
+import jpa.practice.form.MemberForm;
 import jpa.practice.member.Member;
 import jpa.practice.member.MemberAccount;
 import jpa.practice.member.MemberSessionService;
@@ -23,12 +24,11 @@ public class MemberSessionController {
     private final MemberSessionService memberSessionService;
 
     @PostMapping("/add")
-    public void joinMember2(@Valid @ModelAttribute Member member,
-                            @Valid @ModelAttribute MemberAccount memberAccount) {
-
-        memberSessionService.save_account(memberAccount);
-//         회원가입시 오류가 발생했을 때 어떻게 해결해야 할 지 생각해보기
+    public void joinMember2(MemberForm form) {
+        MemberAccount memberAccount = MemberAccount.create(form.getMemberId(), form.getPw());
+        Member member = Member.create(form.getName(), memberAccount);
         memberSessionService.save(member);
+//         회원가입시 오류가 발생했을 때 어떻게 해결해야 할 지 생각해보기
     }
 
 }

@@ -28,13 +28,20 @@ public class Member {
     @JoinColumn(name="basket_id")
     private MemberBasket memberBasket;
 
-    @OneToOne
-    @JoinColumn(name="id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="account_id")
     private MemberAccount memberAccount;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="order_id")
     private List<Order> PostOrder = new ArrayList<>();
+
+    public static Member create(String name, MemberAccount memberAccount) {
+        Member member = new Member();
+        member.setName(name);
+        member.setMemberAccount(memberAccount);
+        return member;
+    }
 
     public void addOrder(Order order) {
         PostOrder.add(order);

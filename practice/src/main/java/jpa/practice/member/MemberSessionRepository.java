@@ -21,10 +21,6 @@ public class MemberSessionRepository {
         //store.put(member.getMemberId(), member);
     }
 
-    public void save_account(MemberAccount memberAccount) {
-        em.merge(memberAccount);
-    }
-
     public Member findById(String id) {
         //return store.get(id);
         return em.createQuery("select m from Member m where m.memberId  = :member_id", Member.class)

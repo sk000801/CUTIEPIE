@@ -12,10 +12,17 @@ import java.util.Map;
 public class MemberAccount {
 
     @Id
+    @Column(name="accountId")
     private String id;
 
     private String pw;
 
+    public static MemberAccount create(String id, String pw) {
+        MemberAccount memberAccount = new MemberAccount();
+        memberAccount.setId(id);
+        memberAccount.setPw(pw);
+        return memberAccount;
+    }
 //    public String push(String pw) {
 //        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //        return encoder.encode(pw);
