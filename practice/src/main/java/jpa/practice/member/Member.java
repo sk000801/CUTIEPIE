@@ -1,6 +1,7 @@
 package jpa.practice.member;
 
 import jpa.practice.basket.MemberBasket;
+import jpa.practice.order.Order;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.Getter;
@@ -17,14 +18,11 @@ import java.util.UUID;
 public class Member {
 
     @Id
+    @Column(name="id")
     private String id = UUID.randomUUID().toString();
 
     @Column(name="name")
     private String name;
-
-//    @Enumerated(EnumType.STRING)
-//    private MemberStatus status;
-    //isAdmin
 
     @OneToOne
     @JoinColumn(name="basket_id")
@@ -33,4 +31,16 @@ public class Member {
     @OneToOne
     @JoinColumn(name="id")
     private MemberAccount memberAccount;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_id")
+    private List<Order> PostOrder = new ArrayList<>();
+
+    public void addOrder(Order order) {
+        PostOrder.add(order);
+        order.setMember(this);
+    }
+    public void cancel(Order order) {
+        PostOrder.remove(order);
+    }
 }

@@ -1,6 +1,5 @@
 package jpa.practice.form;
 
-import jpa.practice.member.MemberStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
