@@ -21,15 +21,12 @@ public class MemberSessionRepository {
         //store.put(member.getMemberId(), member);
     }
 
-//    public Member findById(String id) {
-//        //return store.get(id);
-//        return em.createQuery("select m from Member m where m.memberId  = :member_id", Member.class)
-//                .setParameter("member_id", id)
-//                .getSingleResult();
-//    }
+    public Member findByUID(String id) {
+        return em.find(Member.class, id);
+    }
 
     public Member findById(String id) {
-        return em.createQuery("select m from Member m where m.memberAccount.id = :account_id", Member.class)
+        return em.createQuery("select m from Member m where m.MemberAccount.id = :account_id", Member.class)
                 .setParameter("account_id", id)
                 .getSingleResult();
     }

@@ -18,6 +18,10 @@ public class MemberSessionService {
         memberRepository.save(member);
     }
 
+    public Member findByUID(String id) {
+        return memberRepository.findByUID(id);
+    }
+
     public Member findById(String id) {
         return memberRepository.findById(id);
     }

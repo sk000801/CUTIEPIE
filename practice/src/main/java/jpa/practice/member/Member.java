@@ -30,6 +30,7 @@ public class Member {
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="account_id")
+    @Transient
     private MemberAccount memberAccount;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
