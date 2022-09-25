@@ -21,10 +21,16 @@ public class MemberSessionRepository {
         //store.put(member.getMemberId(), member);
     }
 
+//    public Member findById(String id) {
+//        //return store.get(id);
+//        return em.createQuery("select m from Member m where m.memberId  = :member_id", Member.class)
+//                .setParameter("member_id", id)
+//                .getSingleResult();
+//    }
+
     public Member findById(String id) {
-        //return store.get(id);
-        return em.createQuery("select m from Member m where m.memberId  = :member_id", Member.class)
-                .setParameter("member_id", id)
+        return em.createQuery("select m from Member m where m.memberAccount.id = :account_id", Member.class)
+                .setParameter("account_id", id)
                 .getSingleResult();
     }
 
