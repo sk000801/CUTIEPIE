@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
-@Getter
-@Setter
+
 @Data
 public class MemberForm {
     @NotEmpty
@@ -16,5 +15,4 @@ public class MemberForm {
     private String pw;
     @NotEmpty
     private String name;
-    private MemberStatus status;
 }
