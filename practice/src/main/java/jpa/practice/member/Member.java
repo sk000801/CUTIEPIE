@@ -29,8 +29,7 @@ public class Member {
     private MemberBasket memberBasket;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="account_id")
-    @Transient
+    @JoinColumn(name="uuid")
     private MemberAccount memberAccount;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)

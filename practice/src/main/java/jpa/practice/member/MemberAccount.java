@@ -12,6 +12,8 @@ import java.util.Map;
 public class MemberAccount {
 
     @Id
+    private String uuid;
+
     @Column(name="accountId")
     private String id;
 

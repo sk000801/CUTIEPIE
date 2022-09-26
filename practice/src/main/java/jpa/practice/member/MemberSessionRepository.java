@@ -21,14 +21,22 @@ public class MemberSessionRepository {
         //store.put(member.getMemberId(), member);
     }
 
+    public void save_account(MemberAccount memberAccount) {
+        em.merge(memberAccount);
+    }
+
     public Member findByUID(String id) {
         return em.find(Member.class, id);
     }
 
     public Member findById(String id) {
-        return em.createQuery("select m from Member m where m.MemberAccount.id = :account_id", Member.class)
-                .setParameter("account_id", id)
+        return em.createQuery("select m from Member m where m.uuid = :uuid", Member.class)
+                .setParameter("uuid", id)
                 .getSingleResult();
+    }
+
+    public MemberAccount findByMemberId(String id) {
+        return em.find(MemberAccount.class, id);
     }
 
     public List<Member> findAll() {

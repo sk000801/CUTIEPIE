@@ -27,6 +27,7 @@ public class MemberSessionController {
     public void joinMember2(MemberForm form) {
         MemberAccount memberAccount = MemberAccount.create(form.getMemberId(), form.getPw());
         Member member = Member.create(form.getName(), memberAccount);
+        memberSessionService.save_account(memberAccount);
         memberSessionService.save(member);
 //         회원가입시 오류가 발생했을 때 어떻게 해결해야 할 지 생각해보기
     }
