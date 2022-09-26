@@ -30,10 +30,6 @@ public class MemberSessionService {
         return memberRepository.findById(id);
     }
 
-    public MemberAccount findByMemberId(String id) {
-        return memberRepository.findByMemberId(id);
-    }
-
     public List<Member> findAll() {
         return memberRepository.findAll();
     }

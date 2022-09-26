@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -12,7 +13,7 @@ import java.util.Map;
 public class MemberAccount {
 
     @Id
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(name="accountId")
     private String id;

@@ -30,13 +30,9 @@ public class MemberSessionRepository {
     }
 
     public Member findById(String id) {
-        return em.createQuery("select m from Member m where m.uuid = :uuid", Member.class)
+        return em.createQuery("select m from Member m where m.memberaccount.uuid = :uuid", Member.class)
                 .setParameter("uuid", id)
                 .getSingleResult();
-    }
-
-    public MemberAccount findByMemberId(String id) {
-        return em.find(MemberAccount.class, id);
     }
 
     public List<Member> findAll() {
