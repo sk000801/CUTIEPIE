@@ -29,16 +29,22 @@ public class MemberSessionRepository {
         return em.find(Member.class, id);
     }
 
-    public Member findById(String id) {
-        return em.createQuery("select m from Member m where m.memberaccount.uuid = :uuid", Member.class)
-                .setParameter("uuid", id)
+    public MemberAccount findByUID2(String id) {
+        return em.createQuery("select ma from MemberAccount ma where ma.id = :account_id", MemberAccount.class)
+                .setParameter("id", id)
                 .getSingleResult();
     }
+
+    public Member findByAccount(MemberAccount memberAccount) {
+        return em.createQuery("select m from Member m where m.memberAccount = :member_account", Member.class)
+                .setParameter("memberAccount", memberAccount)
+                .getSingleResult();
+    }
+
 
     public List<Member> findAll() {
         return em.createQuery("select m from Member as m", Member.class)
                 .getResultList();
-        //return new ArrayList<>(store.values());
     }
 
 //    public void clear() {

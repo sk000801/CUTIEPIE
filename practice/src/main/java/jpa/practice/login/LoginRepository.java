@@ -1,6 +1,7 @@
 package jpa.practice.login;
 
 import jpa.practice.member.Member;
+import jpa.practice.member.MemberAccount;
 import jpa.practice.member.MemberSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,9 @@ public class LoginRepository {
     private final MemberSessionService memberSessionService;
 
     public Member login(String id, String pw) {
-         Member member = memberSessionService.findById(id);
-         if(member.getMemberAccount().getPw().equals(pw)) {
+         MemberAccount memberAccount = memberSessionService.findByUID2(id);
+         Member member = memberSessionService.findByAccount(memberAccount);
+         if(memberAccount.getPw().equals(pw)) {
              return member;
          }
          else return null;
@@ -25,6 +27,7 @@ public class LoginRepository {
     }
 
     public Object failId(String id) {
-        return memberSessionService.findById(id);
+        MemberAccount memberAccount = memberSessionService.findByUID2(id);
+        return memberSessionService.findByAccount(memberAccount);
     }
 }

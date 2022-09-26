@@ -26,8 +26,12 @@ public class MemberSessionService {
         return memberRepository.findByUID(id);
     }
 
-    public Member findById(String id) {
-        return memberRepository.findById(id);
+    public MemberAccount findByUID2(String id) {
+        return memberRepository.findByUID2(id);
+    }
+
+    public Member findByAccount(MemberAccount memberAccount) {
+        return memberRepository.findByAccount(memberAccount);
     }
 
     public List<Member> findAll() {

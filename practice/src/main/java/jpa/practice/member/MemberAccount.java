@@ -13,9 +13,10 @@ import java.util.UUID;
 public class MemberAccount {
 
     @Id
+    @Column(name="uuid")
     private String uuid = UUID.randomUUID().toString();
 
-    @Column(name="accountId")
+    @Column(name="account_id")
     private String id;
 
     private String pw;
