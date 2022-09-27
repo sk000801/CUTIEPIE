@@ -17,8 +17,8 @@ public class LoginRepository {
     private final MemberSessionService memberSessionService;
 
     public Member login(String id, String pw) {
-         MemberAccount memberAccount = memberSessionService.findByUID2(id);
-         Member member = memberSessionService.findByAccount(memberAccount);
+        MemberAccount memberAccount = memberSessionService.findByUID2(id);
+        Member member = memberSessionService.findByAccount(memberAccount);
          if(memberAccount.getPw().equals(pw)) {
              return member;
          }

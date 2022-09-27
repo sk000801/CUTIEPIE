@@ -31,12 +31,12 @@ public class MemberSessionRepository {
 
     public MemberAccount findByUID2(String id) {
         return em.createQuery("select ma from MemberAccount ma where ma.id = :account_id", MemberAccount.class)
-                .setParameter("id", id)
+                .setParameter("account_id", id)
                 .getSingleResult();
     }
 
     public Member findByAccount(MemberAccount memberAccount) {
-        return em.createQuery("select m from Member m where m.memberAccount = :member_account", Member.class)
+        return (Member) em.createQuery("select m from Member m where m.memberAccount = :memberAccount", Member.class)
                 .setParameter("memberAccount", memberAccount)
                 .getSingleResult();
     }
@@ -47,7 +47,4 @@ public class MemberSessionRepository {
                 .getResultList();
     }
 
-//    public void clear() {
-//        store.clear();
-//    }
 }
