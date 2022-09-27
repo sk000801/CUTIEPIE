@@ -1,5 +1,6 @@
 package jpa.practice.order;
 
+import jpa.practice.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,12 @@ public class OrderRepository {
 
     public List findAll() {
         return em.createQuery("select o from Order as o")
+                .getResultList();
+    }
+
+    public List<Order> memberOrderList(Member member) {
+        return em.createQuery("select o from Order o where o.member = :member", Order.class)
+                .setParameter("member", member)
                 .getResultList();
     }
 

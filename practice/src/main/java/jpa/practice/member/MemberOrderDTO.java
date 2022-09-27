@@ -1,18 +1,17 @@
 package jpa.practice.member;
 
 import jpa.practice.order.Order;
+import jpa.practice.order.OrderService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public class MemberOrderDTO {
-
-    private final List<Order> memberList;
-
-    public MemberOrderDTO(Member member) {
-        this.memberList = member.getPostOrder();
+    private final List<Order> memberOrders;
+    public MemberOrderDTO(Member member, OrderService orderService) {
+        this.memberOrders = orderService.memberOrderList(member);
     }
 }

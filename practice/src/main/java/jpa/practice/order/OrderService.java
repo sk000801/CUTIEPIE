@@ -1,5 +1,6 @@
 package jpa.practice.order;
 
+import jpa.practice.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,10 @@ public class OrderService {
 
     public List findAll() {
         return orderRepository.findAll();
+    }
+
+    public List<Order> memberOrderList(Member member) {
+        return orderRepository.memberOrderList(member);
     }
 
     public void delete(Order order) {

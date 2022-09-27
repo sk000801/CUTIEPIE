@@ -52,7 +52,6 @@ public class Order {
         for(OrderProduct orderProduct : lists) {
             order.addOrderProduct(orderProduct);
         }
-        member.addOrder(order);
         return order;
     }
 
