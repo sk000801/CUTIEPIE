@@ -30,7 +30,7 @@ public class Order {
     @Column(name="order_id")
     private String order_id = UUID.randomUUID().toString();
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="id")
     @JsonIgnore
     private Member member;
