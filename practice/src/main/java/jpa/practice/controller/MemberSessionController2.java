@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Transactional
 public class MemberSessionController2 {
 
     private final OrderService orderService;

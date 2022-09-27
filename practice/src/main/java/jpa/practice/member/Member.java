@@ -1,5 +1,6 @@
 package jpa.practice.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.basket.MemberBasket;
 import jpa.practice.order.Order;
 import jpa.practice.product.Product;
@@ -33,6 +34,7 @@ public class Member {
     private MemberAccount memberAccount;
 
     @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Order> PostOrder = new ArrayList<>();
 
     public static Member create(String name, MemberAccount memberAccount) {
@@ -42,11 +44,11 @@ public class Member {
         return member;
     }
 
-    public void addOrder(Order order) {
-        PostOrder.add(order);
-        //order.setMember(this);
-    }
-    public void cancel(Order order) {
-        PostOrder.remove(order);
-    }
+//    public void addOrder(Order order) {
+//        PostOrder.add(order);
+//        //order.setMember(this);
+//    }
+//    public void cancel(Order order) {
+//        PostOrder.remove(order);
+//    }
 }
