@@ -44,7 +44,7 @@ public class Member {
 
     public void addOrder(Order order) {
         PostOrder.add(order);
-        order.setMember(this);
+        //order.setMember(this);
     }
     public void cancel(Order order) {
         PostOrder.remove(order);

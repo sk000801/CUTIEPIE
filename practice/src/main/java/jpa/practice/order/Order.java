@@ -30,7 +30,7 @@ public class Order {
     @Column(name="order_id")
     private String order_id = UUID.randomUUID().toString();
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="id")
     @JsonIgnore
     private Member member;
@@ -40,8 +40,6 @@ public class Order {
 
     @CreatedDate
     private LocalDateTime createdDate;
-
-
 
     public void addOrderProduct(OrderProduct orderProduct) {
         lists.add(orderProduct);
@@ -54,6 +52,7 @@ public class Order {
         for(OrderProduct orderProduct : lists) {
             order.addOrderProduct(orderProduct);
         }
+        member.addOrder(order);
         return order;
     }
 
