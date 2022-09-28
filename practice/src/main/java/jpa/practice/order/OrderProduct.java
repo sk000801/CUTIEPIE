@@ -1,5 +1,6 @@
 package jpa.practice.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.product.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,16 @@ public class OrderProduct {
 
     @Id
     @Column(name="order_product_id")
+    @JsonIgnore
     private String id = UUID.randomUUID().toString();
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="product_id")
     private Product product;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="order_id")
+    @JsonIgnore
     private Order order;
 
     private int price;

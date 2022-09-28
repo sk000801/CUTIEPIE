@@ -34,6 +34,10 @@ public class MemberSessionService {
         return memberRepository.findByAccount(memberAccount);
     }
 
+    public String findByMember(Member member) {
+        return memberRepository.findByMember(member);
+    }
+
     public List<Member> findAll() {
         return memberRepository.findAll();
     }

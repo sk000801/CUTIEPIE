@@ -26,12 +26,14 @@ import java.sql.*;
 public class Order {
     @Id
     @Column(name="order_id")
+    @JsonIgnore
     private String order_id = UUID.randomUUID().toString();
 
 //    @ManyToOne
 //    @JoinColumn(name="id")
 //    @JsonIgnore
 //    private Member member;
+    @JsonIgnore
     private String memberId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MemberOrderDTO {
     private List<Order> memberOrders;
-    public MemberOrderDTO(Member member, OrderService orderService) {
-        this.memberOrders = orderService.memberOrderList(member.getId());
+    public MemberOrderDTO(String id, OrderService orderService) {
+        this.memberOrders = orderService.memberOrderList(id);
     }
 }

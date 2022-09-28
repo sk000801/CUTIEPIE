@@ -43,6 +43,12 @@ public class MemberSessionRepository {
                 .getSingleResult();
     }
 
+    public String findByMember(Member member) {
+        return em.createQuery("select m.id from Member m where m = :member", String.class)
+                .setParameter("member", member)
+                .getSingleResult();
+    }
+
 
     public List<Member> findAll() {
         return em.createQuery("select m from Member as m", Member.class)

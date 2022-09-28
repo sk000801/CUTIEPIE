@@ -18,10 +18,11 @@ import java.util.List;
 public class MemberSessionController2 {
 
     private final OrderService orderService;
-
+    private final MemberSessionService memberSessionService;
     @ResponseBody
     @GetMapping("/member/orders")
     public MemberOrderDTO memberOrderList(@SessionAttribute(name="mySessionId", required = false) Member member) {
-        return new MemberOrderDTO(member, orderService);
+        String id = memberSessionService.findByMember(member);
+        return new MemberOrderDTO(id, orderService);
     }
 }
