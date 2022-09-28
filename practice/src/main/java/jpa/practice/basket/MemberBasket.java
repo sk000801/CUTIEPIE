@@ -19,12 +19,6 @@ public class MemberBasket {
     @Column(name="basket_id")
     private String basket_id = UUID.randomUUID().toString();
 
-//    @OneToOne
-//    @JoinColumn(name="member_id")
-//    @JsonIgnore
-//    private Member member;
-
-    // fetch=FetchType.LAZY
     @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
     @JsonIgnore
     List<BasketProduct> products = new ArrayList<>();
@@ -34,9 +28,15 @@ public class MemberBasket {
         basketProduct.setMemberBasket(this);
     }
 
-    public static MemberBasket create(BasketProduct... products) {
-        MemberBasket memberBasket = new MemberBasket();
-        //memberBasket.setMember(member);
+    public static MemberBasket create(Member member, BasketProduct... products) {
+        MemberBasket memberBasket;
+        if(member.getMemberBasket().getBasket_id() != null) {
+            memberBasket = member.getMemberBasket();
+        }
+        else {
+            memberBasket = new MemberBasket();
+        }
+
         for(BasketProduct basketProduct : products) {
             memberBasket.addProducts(basketProduct);
         }

@@ -29,10 +29,6 @@ public class Order {
     @JsonIgnore
     private String order_id = UUID.randomUUID().toString();
 
-//    @ManyToOne
-//    @JoinColumn(name="id")
-//    @JsonIgnore
-//    private Member member;
     @JsonIgnore
     private String memberId;
 

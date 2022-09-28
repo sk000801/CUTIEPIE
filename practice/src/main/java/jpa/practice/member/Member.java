@@ -34,10 +34,6 @@ public class Member {
     @JoinColumn(name="uuid")
     private MemberAccount memberAccount;
 
-//    @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<Order> PostOrder = new ArrayList<>();
-
     public static Member create(String name, MemberAccount memberAccount) {
         Member member = new Member();
         member.setName(name);
@@ -45,11 +41,4 @@ public class Member {
         return member;
     }
 
-//    public void addOrder(Order order) {
-//        PostOrder.add(order);
-//        //order.setMember(this);
-//    }
-//    public void cancel(Order order) {
-//        PostOrder.remove(order);
-//    }
 }

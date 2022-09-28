@@ -20,15 +20,17 @@ public class BasketController {
 
     //담는 개수를 주소에다 보냄
     @PostMapping("/members/basket/{id}")
-    public void add(@PathVariable("id") String id,  @RequestParam("count") int count, BindingResult b,
+    public void add(@PathVariable("id") String id, @RequestParam("count") int count,
                     @SessionAttribute(name="mySessionId", required = false) Member member) {
+        //,  BindingResult b
 
+//        if(productRepository.findId(id).getStock() < count) {
+//            b.addError(new FieldError("count","count", "장바구니에 담긴 상품 개수가 재고보다 많습니다!"));
+//            //어우 근데 얘는 count 단독으로 url에서 받아오는 친구라 field가 있는지 모르겠다
+//        }
         BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
-        if(productRepository.findId(id).getStock() < count) {
-            b.addError(new FieldError("count","count", "장바구니에 담긴 상품 개수가 재고보다 많습니다!"));
-            //어우 근데 얘는 count 단독으로 url에서 받아오는 친구라 field가 있는지 모르겠다
-        }
-        MemberBasket memberBasket = MemberBasket.create(basketProduct);
+
+        MemberBasket memberBasket = MemberBasket.create(member, basketProduct);
 
         basketRepository.joinProduct(basketProduct);
         basketRepository.joinAll(memberBasket);
