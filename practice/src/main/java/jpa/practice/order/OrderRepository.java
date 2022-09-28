@@ -28,9 +28,9 @@ public class OrderRepository {
                 .getResultList();
     }
 
-    public List<Order> memberOrderList(Member member) {
-        return em.createQuery("select o from Order o where o.member = :member", Order.class)
-                .setParameter("member", member)
+    public List<Order> memberOrderList(String id) {
+        return em.createQuery("select o from Order o where o.memberId = :member_id", Order.class)
+                .setParameter("member_id", id)
                 .getResultList();
     }
 

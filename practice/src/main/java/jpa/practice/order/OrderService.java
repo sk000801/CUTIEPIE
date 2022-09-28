@@ -26,8 +26,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<Order> memberOrderList(Member member) {
-        return orderRepository.memberOrderList(member);
+    public List<Order> memberOrderList(String id) {
+        return orderRepository.memberOrderList(id);
     }
 
     public void delete(Order order) {

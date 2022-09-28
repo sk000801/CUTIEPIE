@@ -15,7 +15,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name="members")
-@Data
+@Getter
+@Setter
 public class Member {
 
     @Id
@@ -33,9 +34,9 @@ public class Member {
     @JoinColumn(name="uuid")
     private MemberAccount memberAccount;
 
-    @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Order> PostOrder = new ArrayList<>();
+//    @OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<Order> PostOrder = new ArrayList<>();
 
     public static Member create(String name, MemberAccount memberAccount) {
         Member member = new Member();

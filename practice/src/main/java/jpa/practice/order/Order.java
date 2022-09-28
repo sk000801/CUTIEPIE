@@ -2,12 +2,9 @@ package jpa.practice.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpa.practice.member.Member;
-import jpa.practice.product.Product;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -21,7 +18,8 @@ import java.sql.*;
 
 @Entity
 @Table(name="orders")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 // 여러가지 상품들이 종합된 하나의 주문서
@@ -30,10 +28,11 @@ public class Order {
     @Column(name="order_id")
     private String order_id = UUID.randomUUID().toString();
 
-    @ManyToOne
-    @JoinColumn(name="id")
-    @JsonIgnore
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name="id")
+//    @JsonIgnore
+//    private Member member;
+    private String memberId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> lists = new ArrayList<>();
@@ -48,7 +47,7 @@ public class Order {
 
     public static Order create(Member member, OrderProduct... lists) {
         Order order = new Order();
-        order.setMember(member);
+        order.setMemberId(member.getId());
         for(OrderProduct orderProduct : lists) {
             order.addOrderProduct(orderProduct);
         }
