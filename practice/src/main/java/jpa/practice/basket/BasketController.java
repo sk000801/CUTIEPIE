@@ -11,6 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 @Controller
 @RequiredArgsConstructor
 @Transactional
@@ -31,10 +35,9 @@ public class BasketController {
 //            //어우 근데 얘는 count 단독으로 url에서 받아오는 친구라 field가 있는지 모르겠다
 //        }
         BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
-
         MemberBasket memberBasket = MemberBasket.create(member, basketProduct);
 
-        basketRepository.joinProduct(basketProduct);
+        //basketRepository.joinProduct(basketProduct);
         basketRepository.joinAll(memberBasket);
 
         member.setMemberBasket(memberBasket);

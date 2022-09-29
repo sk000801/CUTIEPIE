@@ -1,5 +1,6 @@
 package jpa.practice.member;
 
+import jpa.practice.basket.MemberBasket;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
