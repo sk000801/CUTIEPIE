@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +20,8 @@ public class MemberBasket {
     @Column(name="basket_id")
     private String basket_id = UUID.randomUUID().toString();
 
-    @OneToMany(mappedBy="memberBasket", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="memberBasket", fetch = FetchType.LAZY)
+    // cascade = CascadeType.PERSIST
     @JsonIgnore
     List<BasketProduct> products = new ArrayList<>();
 
@@ -30,7 +32,8 @@ public class MemberBasket {
 
     public static MemberBasket create(Member member, BasketProduct... products) {
         MemberBasket memberBasket;
-        if(member.getMemberBasket().getBasket_id() != null) {
+
+        if(!Objects.isNull(member.getMemberBasket())) {
             memberBasket = member.getMemberBasket();
         }
         else {

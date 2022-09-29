@@ -17,11 +17,11 @@ public class BasketRepository {
     private final EntityManager em;
 
     public void joinAll(MemberBasket memberBasket) {
-        em.persist(memberBasket);
+        em.merge(memberBasket);
     }
 
     public void joinProduct(BasketProduct basketProduct) {
-        em.persist(basketProduct);
+        em.merge(basketProduct);
     }
 
     public MemberBasket findById(String id) {
