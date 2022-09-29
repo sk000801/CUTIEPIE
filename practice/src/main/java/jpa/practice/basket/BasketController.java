@@ -37,7 +37,7 @@ public class BasketController {
         BasketProduct basketProduct = BasketProduct.create(productRepository.findId(id), count);
         MemberBasket memberBasket = MemberBasket.create(member, basketProduct);
 
-        //basketRepository.joinProduct(basketProduct);
+        basketRepository.joinProduct(basketProduct);
         basketRepository.joinAll(memberBasket);
 
         member.setMemberBasket(memberBasket);

@@ -38,7 +38,7 @@ public class MemberBasket {
         else {
             memberBasket = new MemberBasket();
         }
-        memberBasket.getProducts().add(basketProduct);
+        memberBasket.addProducts(basketProduct);
 
         return memberBasket;
     }
