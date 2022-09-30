@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 @RequiredArgsConstructor
@@ -15,10 +16,6 @@ public class ProductRepository {
     private final EntityManager em;
 
     public void join(Product product) {
-//        if(product != null) {
-//            em.merge(product);
-//        }
-//        em.persist(product);
         em.merge(product);
     }
 

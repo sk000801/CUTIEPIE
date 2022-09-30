@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,21 +36,30 @@ public class OrderController {
                       @Valid OrderProductForm form, BindingResult b, @PathVariable("id") String id) {
 
         OrderProduct orderProduct = OrderProduct.create(productService.findId(id), form.getCount(), form.getPrice());
+        productService.join(productService.findId(id));
         if(productService.findId(id).getStock() < form.getCount()) {
             b.addError(new FieldError("count", "form", "주문하신 상품 수가 재고보다 많아요ㅠㅠ"));
         }
-        Order order = Order.create(member, orderProduct);
+        Order order = Order.create_single(member, orderProduct);
+        //아 단일주문 입장에서는 비효율적일 거 같기도...
         orderService.join(order);
 
         //orderProductRepository.join(orderProduct);
         //이렇게 넣어야 order가 orderProduct에 들어간 채로 em에 저장이 됨
     }
     @PostMapping("/orders/join/basket")
-    public void join_basket(@SessionAttribute(name="mySessionId", required = false) Member member,
-                            BindingResult b) {
+    public void join_basket(@SessionAttribute(name="mySessionId", required = false) Member member) {
+                            //BindingResult b) {
         MemberBasket memberBasket = member.getMemberBasket();
         List<BasketProduct> products = memberBasket.getProducts();
-// 여기 수정 !!!!!!!!!!!!!!!
+        List<OrderProduct> lists = new ArrayList<>();
+        for(BasketProduct basketProduct : products) {
+            OrderProduct orderProduct = OrderProduct.create(basketProduct.getProduct(), basketProduct.getCount(), basketProduct.getProduct().getPrice());
+            productService.join(basketProduct.getProduct());
+            lists.add(orderProduct);
+        }
+        Order order = Order.create_basket(member, lists);
+        orderService.join(order);
     }
 
 }

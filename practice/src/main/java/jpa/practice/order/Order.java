@@ -43,11 +43,17 @@ public class Order {
         orderProduct.setOrder(this);
     }
 
-    public static Order create(Member member, OrderProduct... lists) {
+    public static Order create_single(Member member, OrderProduct orderProduct) {
         Order order = new Order();
         order.setMemberId(member.getId());
-        for(OrderProduct orderProduct : lists) {
-            order.addOrderProduct(orderProduct);
+        order.addOrderProduct(orderProduct);
+        return order;
+    }
+    public static Order create_basket(Member member, List<OrderProduct> list) {
+        Order order = new Order();
+        order.setMemberId(member.getId());
+        for(OrderProduct orderProduct : list) {
+           order.addOrderProduct(orderProduct);
         }
         return order;
     }
