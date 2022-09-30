@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,10 +18,16 @@ public class BasketRepository {
     private final EntityManager em;
 
     public void joinAll(MemberBasket memberBasket) {
-        em.merge(memberBasket);
+        if(Objects.isNull(memberBasket)) {
+            em.persist(memberBasket);
+        }
+        else {em.merge(memberBasket);}
     }
 
     public void joinProduct(BasketProduct basketProduct) {
+        if(Objects.isNull(basketProduct)) {
+            em.persist(basketProduct);
+        }
         em.merge(basketProduct);
     }
 
