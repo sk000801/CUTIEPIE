@@ -4,6 +4,7 @@ import jpa.practice.basket.MemberBasket;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,8 @@ import java.util.*;
 @Repository
 @RequiredArgsConstructor
 @Transactional
-public class MemberSessionRepository {
-
+public class MemberSessionRepository  {
+ //implements JpaRepository<MemberAccount, String>
     private final EntityManager em;
     //private static final Map<String, Member> store = new HashMap<>();
 
@@ -49,7 +50,6 @@ public class MemberSessionRepository {
                 .setParameter("member", member)
                 .getSingleResult();
     }
-
 
     public List<Member> findAll() {
         return em.createQuery("select m from Member as m", Member.class)
