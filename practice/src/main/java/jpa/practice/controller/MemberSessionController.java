@@ -6,6 +6,7 @@ import jpa.practice.member.Member;
 import jpa.practice.member.MemberAccount;
 import jpa.practice.member.MemberSessionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,16 +21,19 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @RequestMapping("/members")
 @Transactional
+@Slf4j
 //모든 매핑은 member를 상속함! 다는 의미래용
 public class MemberSessionController {
 
     private final MemberSessionService memberSessionService;
 
     @PostMapping("/add")
-    public void joinMember2(MemberForm form, Model model) {
+    public void joinMember2(@Valid MemberForm form, BindingResult b, Model model) {
 
         if(!Objects.isNull(memberSessionService.findByUID2(form.getMemberId()))) {
-            model.addAttribute("error", "중복 id입니다!");
+            b.hasErrors();
+            log.info("중복 id입니다. 다시 입력해주세요!");
+            //model.addAttribute("error", "중복 id입니다!");
         }
         else {
             MemberAccount memberAccount = MemberAccount.create(form.getMemberId(), form.getPw());
