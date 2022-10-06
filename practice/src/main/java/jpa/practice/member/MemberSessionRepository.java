@@ -33,10 +33,11 @@ public class MemberSessionRepository  {
         return em.find(Member.class, id);
     }
 
-    public MemberAccount findByUID2(String id) {
-        return em.createQuery("select ma from MemberAccount ma where ma.id = :account_id", MemberAccount.class)
+    public Optional<MemberAccount> findByUID2(String id) {
+        List<MemberAccount> memberAccounts = em.createQuery("select ma from MemberAccount ma where ma.id = :account_id", MemberAccount.class)
                 .setParameter("account_id", id)
-                .getSingleResult();
+                .getResultList();
+        return memberAccounts.stream().findAny();
     }
 
     public Member findByAccount(MemberAccount memberAccount) {

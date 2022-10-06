@@ -26,7 +26,7 @@ public class MemberSessionService {
         return memberRepository.findByUID(id);
     }
 
-    public MemberAccount findByUID2(String id) {
+    public Optional<MemberAccount> findByUID2(String id) {
         return memberRepository.findByUID2(id);
     }
 

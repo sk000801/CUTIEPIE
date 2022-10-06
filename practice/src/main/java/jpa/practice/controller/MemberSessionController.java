@@ -41,7 +41,6 @@ public class MemberSessionController {
             memberSessionService.save_account(memberAccount);
             memberSessionService.save(member);
         }
-
 //         회원가입시 오류가 발생했을 때 어떻게 해결해야 할 지 생각해보기
     }
 
