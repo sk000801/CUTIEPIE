@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,26 +20,29 @@ public class LoginRepository {
     private final MemberSessionService memberSessionService;
     private final EntityManager em;
 
-    public Member login(String id, String pw) {
-        Optional memberAccount = null;
-        try {
-            memberAccount = memberSessionService.findByUID2(id);
-            Member member =  (Member) em.createQuery("select m from Member m where m.memberAccount = :memberAccount", Member.class)
+    public Optional<Member> login(String id, String pw) {
+        Optional<MemberAccount> memberAccount = memberSessionService.findByUID2(id);
+        Optional<Member> member = null;
+        if (memberAccount.isPresent()) { //id가 존재한다면
+            Member member1 =  em.createQuery("select m from Member m where m.memberAccount = :memberAccount", Member.class)
                     .setParameter("memberAccount", memberAccount)
                     .getSingleResult();
-            if(memberAccount.equals()) {
-                return member;
+            if (member1.getMemberAccount().getPw().equals(pw)) {
+                member = Optional.of(member1);
             }
-            else return null;
+            else {
+                System.out.println("비밀번호가 틀렸습니다. 정확히 입력해주세요");
+            }
+        } else { //일치하는 id가 없다면
+            System.out.println("존재하는 아이디가 없습니다. 정확히 입력해주세요");
         }
-        catch(Exception e) {
-            System.out.println("로그인에 실패하셨습니다. 정확히 입력해주세요.");
-        }
-        //id와 pw가 같은 멤버를 return 해주던가 없으면 그냥 null을 반환해주던가
-    }
-
-    public Object failId(String id) {
-        MemberAccount memberAccount = memberSessionService.findByUID2(id);
-        return memberSessionService.findByAccount(memberAccount);
+        return member;
     }
 }
+
+
+
+
+
+
+

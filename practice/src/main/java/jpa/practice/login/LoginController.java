@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
@@ -58,11 +59,11 @@ public class LoginController {
             b.reject("Program Error", "죄송합니다 오류가 발생했습니다ㅠㅠ");
         }
 
-        if(loginRepository.failId(form.getMemberId()) == null) {
-            b.addError(new FieldError("memberId", "form", "회원님 아이디가 틀렸습니다!"));
-        }
+//        if(loginRepository.failId(form.getMemberId()) == null) {
+//            b.addError(new FieldError("memberId", "form", "회원님 아이디가 틀렸습니다!"));
+//        }
 
-        Member logMember = loginRepository.login(form.getMemberId(), form.getPw());
+        Optional<Member> logMember = loginRepository.login(form.getMemberId(), form.getPw());
 
         if(logMember == null) {
             b.addError(new FieldError("form", "pw", "회원님 비밀번호가 틀렸습니다!"));

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class MemberSessionController {
     @PostMapping("/add")
     public void joinMember2(@Valid MemberForm form, BindingResult b, Model model) {
 
-        if(!Objects.isNull(memberSessionService.findByUID2(form.getMemberId()))) {
+        if(memberSessionService.findByUID2(form.getMemberId()).isPresent()) {
             b.hasErrors();
             log.info("중복 id입니다. 다시 입력해주세요!");
             //model.addAttribute("error", "중복 id입니다!");
