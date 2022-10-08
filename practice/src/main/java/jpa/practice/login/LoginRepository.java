@@ -22,7 +22,7 @@ public class LoginRepository {
 
     public Optional<Member> login(String id, String pw) {
         Optional<MemberAccount> memberAccount = memberSessionService.findByUID2(id);
-        Optional<Member> member = null;
+        Optional<Member> member = Optional.empty();
         if (memberAccount.isPresent()) { //id가 존재한다면
             Member member1 =  em.createQuery("select m from Member m where m.memberAccount = :memberAccount", Member.class)
                     .setParameter("memberAccount", memberAccount)

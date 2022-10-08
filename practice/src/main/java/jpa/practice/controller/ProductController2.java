@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +78,7 @@ public class ProductController2 {
                             .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                             .setContentType("image/jpeg")
                             .build();
-            Blob blob = storage.create(blobInfo, new FileInputStream(filename));
+            Blob blob = storage.create(blobInfo, Files.newInputStream(Paths.get(filename)));
             //blob.getMediaLink()
             imageStore.setUrl("https://storage.googleapis.com/cutiepie_image/"+imageStore.getImage_id());
 
