@@ -28,24 +28,14 @@ public class ProductController extends HttpServlet {
     private final ProductService productService;
 
     @GetMapping("/admins/pManage/{id}/edit")
-    public String edit(@PathVariable("id") String id, Model model) {
+    public Product edit(@PathVariable("id") String id, Model model) {
         Product product = productService.findId(id);
-
-        ProductForm form = new ProductForm();
-
-        form.setPName(product.getName());
-        form.setPrice(product.getPrice());
-        form.setStock(product.getStock());
-        form.setDetail(product.getDetail());
-
-        model.addAttribute("form", form);
-
-        return "products/editProduct";
+        return product;
     }
 
     @PostMapping("/admins/pManage/{id}/edit")
-    public void edit2(ProductForm form) {
-        Product product = new Product();
+    public void edit2(ProductForm form, @PathVariable("id") String id) {
+        Product product = productService.findId(id);
         product.setName(form.getPName());
         product.setPrice(form.getPrice());
         product.setStock(form.getStock());
@@ -66,5 +56,6 @@ public class ProductController extends HttpServlet {
         model.addAttribute("members", results);
         return "products/productList";
     }
+    //이 친구는 제대로 된 검색을 구현하고 써봐야할듯..?
 
 }
