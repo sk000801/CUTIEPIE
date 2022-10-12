@@ -89,3 +89,10 @@ A different object with the same identifier value was already associated with th
 <br>
 다만 joincolumn에 사용되는 컬럼이 되도록이면 primary key를 사용하는 것 같다.
 
+
+<br>
+
+3. 이미지 form에서 입력받고 google cloud storage에 저장하여 url 남기기
+<br>
+
+왜 로컬에다 저장을 해야만 사진을 넘길 수 있냐고!!!!!!!!! 아직도 의문!!!!!
