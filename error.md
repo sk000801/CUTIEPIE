@@ -1,4 +1,4 @@
-#### 나를 고통받게 했던 친구들..
+#### CUTIEPIE 대표 밑거름들 (┬┬﹏┬┬)
 
 1)
 
@@ -42,5 +42,7 @@ A different object with the same identifier value was already associated with th
 3. 이미지 form에서 입력받고 google cloud storage에 저장하여 url 남기기
 <br>
 왜 로컬에다 저장을 해야만 사진을 넘길 수 있냐고!!!!!!!!! 아직도 의문!!!!!
+
+<br>
 
 4. 이미지 서버에서 저장하고 배포하기
