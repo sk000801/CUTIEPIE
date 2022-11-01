@@ -25,4 +25,8 @@ public class ProductService {
     public List<Product> findAll() {
         return productRepository.findAll();
     }
+
+    public List<Product> findContainKeyword(String name) {
+        return productRepository.findContainKeyword(name);
+    }
 }

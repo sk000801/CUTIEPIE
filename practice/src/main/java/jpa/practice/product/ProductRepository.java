@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Repository
 @RequiredArgsConstructor
@@ -38,5 +40,11 @@ public class ProductRepository {
     public List<Product> findAll() {
         return em.createQuery("select p from Product as p", Product.class)
                 .getResultList();
+    }
+
+    public List<Product> findContainKeyword(String name) {
+        Product[] findResult = (Product[]) findAll().stream().filter(product -> product.getName().contains(name)).toArray();
+        List<Product> findResults = Arrays.asList(findResult);
+        return findResults;
     }
 }

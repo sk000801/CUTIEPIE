@@ -45,16 +45,15 @@ public class ProductController extends HttpServlet {
     }
 
     @GetMapping("/admins/pManage/search")
-    public String search(@RequestParam(name="name", required = false) String name, Model model) {
-        List<Product> results;
+    public List<Product> search(@RequestParam(name="name", required = false) String name, Model model) {
+        List<Product> results = null;
         if(name != null) {
-            results = productService.findName(name);
+            results = productService.findContainKeyword(name);
         }
         else {
-            results = productService.findAll();
+            System.out.println("죄송합니다! 일치하는 상품이 하나도 없습니다! 다시 입력해 주세요!");
         }
-        model.addAttribute("members", results);
-        return "products/productList";
+        return results;
     }
     //이 친구는 제대로 된 검색을 구현하고 써봐야할듯..?
 
