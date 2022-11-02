@@ -27,12 +27,6 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     private final ProductService productService;
 
-    @GetMapping("/admins/pManage/{id}/edit")
-    public Product edit(@PathVariable("id") String id, Model model) {
-        Product product = productService.findId(id);
-        return product;
-    }
-
     @PostMapping("/admins/pManage/{id}/edit")
     public void edit2(ProductForm form, @PathVariable("id") String id) {
         Product product = productService.findId(id);
