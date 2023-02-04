@@ -4,10 +4,10 @@ plugins {
 	id 'java'
 }
 
-group = 'Spring2'
+group = 'CUTIEPIE'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_19
+targetCompatibility = JavaVersion.VERSION_19
 
 configurations {
 	compileOnly {
